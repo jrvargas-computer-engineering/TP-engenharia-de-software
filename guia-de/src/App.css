@@ -24,7 +24,7 @@
 
 .App-search-component {
   display: flex;
-  width: 60%;
+  width: 65%;
   font-size: calc(10px + 2vmin);
   border: solid 1px #ff493b;
   border-radius: 100px;
@@ -75,7 +75,7 @@
 
 .App-title {
   background-color: #151F29;
-  width: 60%;
+  width: 70%;
   font-family: "Bebas Neue", sans-serif;
   font-weight: 400;
   font-style: normal;
@@ -83,7 +83,7 @@
   flex-direction: row;
   align-items: start;
   justify-content: left;
-  font-size: 7em;
+  font-size: calc(0.08*100vw);
   color: #ff493b;
   margin-top: 100px;
   margin-bottom: 0;
