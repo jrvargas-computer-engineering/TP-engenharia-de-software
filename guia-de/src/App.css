@@ -6,12 +6,6 @@
 }
 
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
 .App-header {
   background-color: #151F29;
   display: flex;
@@ -37,7 +31,7 @@
 
 .App-search-box {
   display: flex;
-  width: 92%;
+  width: 80%;
   font-size: calc(10px + 2vmin);
   border: none;
   outline: none;
@@ -48,16 +42,16 @@
 
 .App-button{
   display: flex;
-  width: 15%;
+  width: 15vw;
   align-self:auto;
   justify-content: center;
   background-color: #151F29;
   border: solid 1px #ff493b;
   border-radius: 100px;
   color: rgb(180, 176, 176);
-  font-size: 1.5rem;
-  padding: 0.5rem;
-  margin: 0;
+  font-size: 2vw;
+  padding: 0.2rem;
+  margin: 10px;
 
 }
 
@@ -66,11 +60,13 @@
   flex-direction: column;
   align-items: end;
   align-self: flex-end;
+  width: 5vw;
   margin: 5px;
 }
-
 .App-side-icon{
   margin: 8px;
+  max-width: 100%;
+  height: auto;
 }
 
 .App-title {
@@ -85,7 +81,7 @@
   justify-content: left;
   font-size: calc(0.08*100vw);
   color: #ff493b;
-  margin-top: 100px;
+  margin-top: 10vh;
   margin-bottom: 0;
 }
 
