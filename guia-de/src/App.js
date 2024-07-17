@@ -3,30 +3,7 @@ import React from 'react';
 import { SearchBar } from './components/SearchBar';
 import { SideIcon } from './components/SideIcon';
 import { AnimatedText } from './components/AnimatedText';
-
-
-const professions = [
-  "Engenheiros", 
-  "Médicos", 
-  "Professores", 
-  "Advogados", 
-  "Programadores", 
-  "Designers", 
-  "Arquitetos", 
-  "Enfermeiros", 
-  "Farmacêuticos", 
-  "Dentistas",
-  "Psicólogos",
-  "Fisioterapeutas",
-  "Nutricionistas",
-  "Veterinários",
-  "Biólogos",
-  "Químicos",
-  "Físicos",
-  "Astrônomos",
-  "Geólogos",
-  "Meteorologistas"
-];
+import { professions } from './professions';
 
 
 function App() {
