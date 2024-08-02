@@ -7,7 +7,7 @@ from pymongo import MongoClient
 #Files
 from settings.settings import MONGO_URI
 
-class MongoDBService:
+class DatabaseConnection:
     def __init__(self):
         self.client = MongoClient(MONGO_URI)
         self.db = self.client["guia-de"]

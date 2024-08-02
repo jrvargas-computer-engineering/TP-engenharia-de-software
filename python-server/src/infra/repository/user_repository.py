@@ -1,14 +1,18 @@
 
 
+import os
+import sys
+sys.path.append('../')
+
 from pymongo import MongoClient
 
 from settings.settings import MONGO_URI
 from models.user import User
-from services.mongodb_service import MongoDBService
+from infra.database.database_connection import DatabaseConnection
 
 class UserRepository:
     def __init__(self):
-        self.db = MongoDBService().connect()
+        self.db = DatabaseConnection().connect()
         self.collection = self.db["users"] 
 
     def save_user(self, user: User):

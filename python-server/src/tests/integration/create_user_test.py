@@ -1,13 +1,11 @@
 import sys
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../')))
-
-from models.user import User 
-from repositories.user_repository import UserRepository    
-
 from uuid import uuid4  
 import pytest
 
+from models.user import User 
+from infra.repository.user_repository import UserRepository    
 
 def test_create_user():
 
@@ -24,9 +22,3 @@ def test_create_user():
     assert saved_user == user.__dict__
 
     user_repository.delete_user(user.id)
-
-
-
-user = User("jp", str(uuid4()), "jp")
-
-print(user.get_id())
