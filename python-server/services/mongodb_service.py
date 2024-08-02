@@ -7,10 +7,11 @@ from pymongo import MongoClient
 #Files
 from settings.settings import MONGO_URI
 
-def connect():
-    client = MongoClient(MONGO_URI)
-    db_connection = client['guia-de']
+class MongoDBService:
+    def __init__(self):
+        self.client = MongoClient(MONGO_URI)
+        self.db = self.client["guia-de"]
 
-    return db_connection
+    def connect(self):
+        return self.db
 
-#messages_collection = connect().get_collection('users')

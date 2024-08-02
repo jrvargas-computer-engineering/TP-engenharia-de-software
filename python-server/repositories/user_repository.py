@@ -4,11 +4,11 @@ from pymongo import MongoClient
 
 from settings.settings import MONGO_URI
 from models.user import User
+from services.mongodb_service import MongoDBService
 
 class UserRepository:
     def __init__(self):
-        self.client = MongoClient(MONGO_URI)
-        self.db = self.client["guia-de"]
+        self.db = MongoDBService().connect()
         self.collection = self.db["users"] 
 
     def save_user(self, user: User):
