@@ -8,7 +8,7 @@ export function SideIcon() {
       <Link to='/MyAccount'>
         <img className='App-side-icon' src='img/account.png' alt='Minha Conta' />
       </Link>
-      <Link to='/Add'>
+      <Link to='/AddGuide'>
         <img className='App-side-icon' src='img/add.png' alt='Adicionar ...' />
       </Link>
     </div>

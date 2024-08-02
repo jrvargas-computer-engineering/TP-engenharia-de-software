@@ -4,7 +4,7 @@ import { SideIcon } from '../components/SideIcon';
 import { AnimatedText } from '../components/AnimatedText';
 import { professions } from '../professions';
 
-export function MyAccount() {
+export function AddGuide() {
     return (
         <>
         <SideIcon/>
@@ -14,4 +14,4 @@ export function MyAccount() {
     );
 }
 
-export default MyAccount;
+export default AddGuide;
