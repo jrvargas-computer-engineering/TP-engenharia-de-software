@@ -1,7 +1,7 @@
 
 #Libs
 import sys
-sys.path.append('../python-server')
+sys.path.append('../python-server/src')
 from pymongo import MongoClient
 
 #Files
@@ -12,6 +12,6 @@ class DatabaseConnection:
         self.client = MongoClient(MONGO_URI)
         self.db = self.client["guia-de"]
 
+
     def connect(self):
         return self.db
-
