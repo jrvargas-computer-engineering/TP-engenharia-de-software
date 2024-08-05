@@ -21,7 +21,7 @@ def test_create_authenticated_user():
     assert saved_user["email"] == user.email
     assert saved_user == user.__dict__
 
-
+    user_repository.delete_user(user.id)
 
 def test_create_anoymous_user():
     
@@ -36,3 +36,4 @@ def test_create_anoymous_user():
     assert saved_user["id"] == user.id
     assert saved_user == user.__dict__
 
+    user_repository.delete_user(user.id)
