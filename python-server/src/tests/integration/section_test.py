@@ -12,8 +12,8 @@ from infra.repository.section_repository import SectionRepository
 
 def test_create_section():
         
-        topics = [Topic(str(uuid4()), "Topic 1", datetime.now(), datetime.now()), Topic(str(uuid4()), "Topic 2", datetime.now(), datetime.now())]
-        section = Section(str(uuid4()), "Section 1", topics, str(datetime.now()), str(datetime.now()))
+        topics = [Topic(str(uuid4()), "Topic 1"), Topic(str(uuid4()), "Topic 2")]
+        section = Section(str(uuid4()), "Section 1", topics)
         print(section)
         section_repository = SectionRepository()
         section_repository.save_section(section)
@@ -32,8 +32,8 @@ def test_create_section():
 
 def test_delete_section():
             
-            topics = [Topic(str(uuid4()), "Topic 1", datetime.now(), datetime.now()), Topic(str(uuid4()), "Topic 2", datetime.now(), datetime.now())]
-            section = Section(str(uuid4()), "Section 1", topics, str(datetime.now()), str(datetime.now()))
+            topics = [Topic(str(uuid4()), "Topic 1"), Topic(str(uuid4()), "Topic 2")]
+            section = Section(str(uuid4()), "Section 1", topics)
             print(section)
             section_repository = SectionRepository()
             section_repository.save_section(section)

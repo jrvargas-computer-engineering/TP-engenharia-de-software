@@ -10,7 +10,7 @@ from infra.repository.review_repository import ReviewRepository
 
 def test_create_review():
     
-    review = Review(str(uuid4()), "Review 1", "Description 1", "Owner 1", "Prestador de Serviço", str(datetime.now()), str(datetime.now()))
+    review = Review(str(uuid4()), "Review 1", "Description 1", "Owner 1", "Prestador de Serviço")
     print(review)
     review_repository = ReviewRepository()
     review_repository.save_review(review)
@@ -30,7 +30,7 @@ def test_create_review():
 
 def test_delete_review():
         
-        review = Review(str(uuid4()), "Review 1", "Description 1", "Owner 1", "Prestador de Serviço", str(datetime.now()), str(datetime.now()))
+        review = Review(str(uuid4()), "Review 1", "Description 1", "Owner 1", "Prestador de Serviço")
         print(review)
         review_repository = ReviewRepository()
         review_repository.save_review(review)

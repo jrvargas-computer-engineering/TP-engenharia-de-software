@@ -9,7 +9,7 @@ class GuideRepository:
         self.db = DatabaseConnection().connect()
         self.collection = self.db["guides"] 
 
-    def save_guide(self, guide: Guide):
+    def save(self, guide: Guide):
         self.collection.insert_one(guide.__dict__)
 
     def delete_guide(self, id):

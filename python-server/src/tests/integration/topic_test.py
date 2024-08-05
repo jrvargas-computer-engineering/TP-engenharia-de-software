@@ -11,7 +11,7 @@ from infra.repository.topic_repository import TopicRepository
 
 def test_create_topic():
             
-    topic = Topic(str(uuid4()), "Topic 1", str(datetime.now()), str(datetime.now()))
+    topic = Topic(str(uuid4()), "Topic 1")
     print(topic)
     topic_repository = TopicRepository()
     topic_repository.save_topic(topic)
@@ -28,7 +28,7 @@ def test_create_topic():
 
 def test_delete_topic():
     
-    topic = Topic(str(uuid4()), "Topic 1", str(datetime.now()), str(datetime.now()))
+    topic = Topic(str(uuid4()), "Topic 1")
     print(topic)
     topic_repository = TopicRepository()
     topic_repository.save_topic(topic)

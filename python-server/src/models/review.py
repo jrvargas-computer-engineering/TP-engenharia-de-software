@@ -1,12 +1,14 @@
+from uuid import uuid4
+
 class Review:
-    def __init__(self, id, title, content, owner, service_provider, created_at, updated_at):
+    def __init__(self, id, title, content, owner, service_provider):
         self.service_provider = service_provider
         self.id = id
         self.title = title
         self.content = content
         self.owner = owner
-        self.created_at = created_at
-        self.updated_at = updated_at
+        self.created_at = str(uuid4())
+        self.updated_at = str(uuid4())
 
     def get_id(self):
         return self.id
@@ -19,6 +21,12 @@ class Review:
     
     def get_owner(self):
         return self.owner
+    
+    def get_created_at(self):
+        return self.created_at
+    
+    def get_updated_at(self):
+        return self.updated_at
     
     def get_service_provider(self):
         return self.service_provider
@@ -37,3 +45,9 @@ class Review:
 
     def set_service_provider(self, service_provider):
         self.service_provider = service_provider
+
+    def set_created_at(self):
+        self.created_at = str(uuid4())
+    
+    def set_updated_at(self):
+        self.updated_at = str(uuid4())
