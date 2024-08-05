@@ -1,12 +1,6 @@
-
-
-import os
 import sys
 sys.path.append('../')
 
-from pymongo import MongoClient
-
-from settings.settings import MONGO_URI
 from models.user import User
 from infra.database.database_connection import DatabaseConnection
 
