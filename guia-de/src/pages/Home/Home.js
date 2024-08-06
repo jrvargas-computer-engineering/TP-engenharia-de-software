@@ -1,8 +1,8 @@
 import React from 'react';
-import { SearchBar } from '../components/SearchBar';
-import { SideIcon } from '../components/SideIcon';
-import { AnimatedText } from '../components/AnimatedText';
-import { professions } from '../professions';
+import { SearchBar } from '../../components/SearchBar';
+import { SideIcon } from '../../components/SideIcon';
+import { AnimatedText } from '../../components/AnimatedText';
+import { professions } from '../../utils/professions';
 
 export function Home() {
     return (
