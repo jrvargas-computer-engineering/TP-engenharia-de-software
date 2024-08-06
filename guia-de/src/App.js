@@ -1,6 +1,10 @@
 import './styles/App.css';
 import React from 'react';
 import { Home } from './pages/Home/Home';
+import { Guide} from './pages/Guide/Guide'
+import { Search} from './pages/Search/Search'
+import { AddGuide } from './pages/AddGuide/AddGuide'
+import { MenuTest } from './pages/MenuTest/MenuTest';
 import { MyAccount } from './pages/MyAccount/MyAccount';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
@@ -12,9 +16,12 @@ function App() {
       <header className="App-header">
         <Router>
           <Routes>
-            <Route exact path="/" element={<Home/>}/>
+            <Route exact path="/" element={<MenuTest/>}/>
+            <Route path="/Home" element={<Home/>}/>
+            <Route path="/Guide" element={<Guide/>}/>
+            <Route path="/Search" element ={<Search/>}/>
             <Route path="/MyAccount" element={<MyAccount/>}/>
-            <Route path="/AddGuide" element={<MyAccount/>}/>
+            <Route path="/AddGuide" element={<AddGuide/>}/>
           </Routes>
         </Router>  
       </header>
