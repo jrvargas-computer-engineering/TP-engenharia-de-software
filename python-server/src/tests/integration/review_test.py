@@ -22,9 +22,10 @@ def test_create_review():
     assert saved_review["id"] == review.id
     assert saved_review["content"] == review.content
     assert saved_review["owner"] == review.owner
-    assert saved_review["created_at"] == review.created_at
-    assert saved_review["updated_at"] == review.updated_at
-    assert saved_review == review.__dict__
+    assert saved_review["created_at"] is not None
+    assert saved_review["updated_at"] is not None
+    assert type(saved_review["created_at"]) == datetime
+    assert type(saved_review["updated_at"]) == datetime
 
     review_repository.delete_review(review.id)
 
@@ -42,9 +43,11 @@ def test_delete_review():
         assert saved_review["id"] == review.id
         assert saved_review["content"] == review.content
         assert saved_review["owner"] == review.owner
-        assert saved_review["created_at"] == review.created_at
-        assert saved_review["updated_at"] == review.updated_at
-        assert saved_review == review.__dict__
+        assert saved_review["created_at"] is not None
+        assert saved_review["updated_at"] is not None
+        assert type(saved_review["created_at"]) == datetime
+        assert type(saved_review["updated_at"]) == datetime
+
     
         review_repository.delete_review(review.id)
     

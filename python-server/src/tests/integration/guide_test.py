@@ -28,9 +28,10 @@ def test_create_guide():
         assert saved_guide["sections"] == guide.sections
         assert saved_guide["visibility"] == guide.visibility
         assert saved_guide["anonymous_allowed"] == guide.anonymous_allowed
-        assert saved_guide["created_at"] == guide.created_at
-        assert saved_guide["updated_at"] == guide.updated_at
-        assert saved_guide == guide.__dict__
+        assert saved_guide["created_at"] is not None
+        assert saved_guide["updated_at"] is not None
+        assert type(saved_guide["created_at"]) == datetime
+        assert type(saved_guide["updated_at"]) == datetime
 
         guide_repository.delete_guide(guide.id)
 

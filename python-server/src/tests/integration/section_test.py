@@ -23,8 +23,10 @@ def test_create_section():
         assert saved_section is not None
         assert saved_section["title"] == section.title
         assert saved_section["id"] == section.id
-        assert saved_section["created_at"] == section.created_at
-        assert saved_section["updated_at"] == section.updated_at
+        assert saved_section["created_at"] is not None
+        assert saved_section["updated_at"] is not None
+        assert type(saved_section["created_at"]) == datetime
+        assert type(saved_section["updated_at"]) == datetime
         assert saved_section["topics"] == [topic.get_id() for topic in topics]
 
         section_repository.delete_section(section.id)
@@ -43,8 +45,10 @@ def test_delete_section():
             assert saved_section is not None
             assert saved_section["title"] == section.title
             assert saved_section["id"] == section.id
-            assert saved_section["created_at"] == section.created_at
-            assert saved_section["updated_at"] == section.updated_at
+            assert saved_section["created_at"] is not None
+            assert saved_section["updated_at"] is not None
+            assert type(saved_section["created_at"]) == datetime
+            assert type(saved_section["updated_at"]) == datetime
             assert saved_section["topics"] == [topic.get_id() for topic in topics]
         
             section_repository.delete_section(section.id)

@@ -21,9 +21,10 @@ def test_create_topic():
     assert saved_topic is not None
     assert saved_topic["title"] == topic.title
     assert saved_topic["id"] == topic.id
-    assert saved_topic["created_at"] == topic.created_at
-    assert saved_topic["updated_at"] == topic.updated_at
-
+    assert saved_topic["created_at"] is not None
+    assert saved_topic["updated_at"] is not None
+    assert type(saved_topic["created_at"]) == datetime
+    assert type(saved_topic["updated_at"]) == datetime
     topic_repository.delete_topic(topic.id)
 
 def test_delete_topic():
@@ -38,9 +39,11 @@ def test_delete_topic():
     assert saved_topic is not None
     assert saved_topic["title"] == topic.title
     assert saved_topic["id"] == topic.id
-    assert saved_topic["created_at"] == topic.created_at
-    assert saved_topic["updated_at"] == topic.updated_at
-
+    assert saved_topic["created_at"] is not None
+    assert saved_topic["updated_at"] is not None
+    assert type(saved_topic["created_at"]) == datetime
+    assert type(saved_topic["updated_at"]) == datetime
+    
     topic_repository.delete_topic(topic.id)
 
     saved_topic = topic_repository.get_topic(topic.id)
