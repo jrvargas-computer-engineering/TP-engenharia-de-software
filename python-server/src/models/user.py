@@ -1,6 +1,5 @@
 from abc import ABC, abstractmethod
-from uuid import uuid4
-from datetime import datetime  # Adicionar importação de datetime
+from datetime import datetime
 
 class User(ABC):
     def __init__(self, username, id):
@@ -30,6 +29,22 @@ class User(ABC):
         pass
 
     @abstractmethod
+    def get_created_at(self):
+        pass
+
+    @abstractmethod
+    def get_updated_at(self):
+        pass
+
+    @abstractmethod
+    def set_created_at(self):
+        pass
+
+    @abstractmethod
+    def set_updated_at(self):
+        pass
+
+    @abstractmethod
     def __str__(self):
         pass
 
@@ -47,17 +62,17 @@ class AnonymousUser(User):
     def set_username(self, username):
         self.username = username
 
-    def set_id(self, id):
-        self.id = id
-    
     def get_type(self):
         return self.type
 
     def get_created_at(self):
         return self.created_at
-
+    
     def get_updated_at(self):
         return self.updated_at
+
+    def set_id(self, id):
+        self.id = id
 
     def set_created_at(self):
         self.created_at = datetime.now()
@@ -66,7 +81,7 @@ class AnonymousUser(User):
         self.updated_at = datetime.now()
 
     def __str__(self):
-        return f"AnonymousUser(username={self.username}, id={self.id})"
+        return f"AnonymousUser(username={self.username}, id={self.id}, created_at={self.created_at}, updated_at={self.updated_at})"
 
 class AuthenticatedUser(User):
     def __init__(self, username, id, email):
@@ -83,24 +98,23 @@ class AuthenticatedUser(User):
     def set_username(self, username):
         self.username = username
 
-    def set_id(self, id):
-        self.id = id
-    
     def get_type(self):
         return self.type
 
     def get_created_at(self):
         return self.created_at
-
+    
     def get_updated_at(self):
         return self.updated_at
+
+    def set_id(self, id):
+        self.id = id
 
     def set_created_at(self):
         self.created_at = datetime.now()
 
     def set_updated_at(self):
         self.updated_at = datetime.now()
-
+    
     def __str__(self):
-        return f"AuthenticatedUser(username={self.username}, id={self.id}, email={self.email}, created_at={self.created_at}, updated_at={self.updated_at})"
-
+        return f"AuthenticatedUser(username={self.username}, id={self.id}, email={self.email})"

@@ -1,8 +1,7 @@
-from uuid import uuid4
-from datetime import datetime  # Adicionar importação de datetime
+from datetime import datetime
 
 class Guide:
-    def __init__(self, id, name, location, type, description, owner, sections, visibility, anonymous_allowed, created_at, updated_at):  
+    def __init__(self, id, name, location, type, description, owner, sections, visibility, anonymous_allowed):  
         self.id = id
         self.name = name
         self.location = location
@@ -12,8 +11,8 @@ class Guide:
         self.sections = sections
         self.visibility = visibility
         self.anonymous_allowed = anonymous_allowed
-        self.created_at = datetime.now()  # Substituir str(uuid4()) por datetime.now()
-        self.updated_at = datetime.now()  # Substituir str(uuid4()) por datetime.now()
+        self.created_at = datetime.now()
+        self.updated_at = datetime.now()
 
     # Getters
     def get_id(self):
@@ -78,10 +77,10 @@ class Guide:
         self.anonymous_allowed = anonymous_allowed
 
     def set_created_at(self):
-        self.created_at = datetime.now()  # Substituir str(uuid4()) por datetime.now()
+        self.created_at = datetime.now()
 
     def set_updated_at(self):
-        self.updated_at = datetime.now()  # Substituir str(uuid4()) por datetime.now()
+        self.updated_at = datetime.now()
 
     def __str__(self):
         return f"Guide(id={self.id}, name={self.name}, location={self.location}, type={self.type}, description={self.description}, owner={self.owner}, sections={self.sections}, visibility={self.visibility}, anonymous_allowed={self.anonymous_allowed}, created_at={self.created_at}, updated_at={self.updated_at})"

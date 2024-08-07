@@ -44,3 +44,5 @@ def test_create_anoymous_user():
     assert type(saved_user["updated_at"]) == datetime
 
     user_repository.delete_user(user.id)
+
+    

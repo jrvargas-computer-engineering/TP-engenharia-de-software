@@ -29,7 +29,7 @@ class CreateGuideInput(BaseModel):
 async def health_check():
     return {"status": "ok"}
 
-@app.post("/saave-guide")
+@app.post("/save-guide")
 async def create_guide(input: CreateGuideInput):   
     try:
         save_guide_usecase.exec(input)
