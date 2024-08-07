@@ -16,4 +16,7 @@ class GuideRepository:
         self.collection.delete_one({"id": id})
 
     def get_guide(self, id):
-        return self.collection.find_one({"id": id})
+        document = self.collection.find_one({"id": id})
+        if document:
+            document["_id"] = str(document["_id"])
+        return document
