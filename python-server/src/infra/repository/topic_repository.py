@@ -1,19 +1,19 @@
 import sys
 sys.path.append('../')
 
-from models.guide import Guide
+from models.topic import Topic
 from infra.database.database_connection import DatabaseConnection
 
-class GuideRepository:
+class TopicRepository:
     def __init__(self):
         self.db = DatabaseConnection().connect()
-        self.collection = self.db["guides"] 
+        self.collection = self.db["topics"] 
 
-    def save(self, guide: Guide):
-        self.collection.insert_one(guide.__dict__)
+    def save_topic(self, topic: Topic):
+        self.collection.insert_one(topic.__dict__)
 
-    def delete_guide(self, id):
+    def delete_topic(self, id):
         self.collection.delete_one({"id": id})
 
-    def get_guide(self, id):
+    def get_topic(self, id):
         return self.collection.find_one({"id": id})
