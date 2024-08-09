@@ -1,0 +1,21 @@
+.section-container{
+    /*background-color: darkred;*/
+    align-items: center;
+}
+
+.header-container{
+    /*background-color: darkcyan;*/
+    display: flex;
+    align-items: center;
+    
+}
+.content-container{
+    justify-content: center;  
+    display: flex;            
+    align-items: center;      
+}
+.grid-container{
+    /*background-color: darkmagenta;*/
+    width: 95%;
+    margin:20px;
+}
