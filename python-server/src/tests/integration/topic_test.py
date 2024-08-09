@@ -25,6 +25,7 @@ def test_create_topic():
     assert saved_topic["updated_at"] is not None
     assert type(saved_topic["created_at"]) == datetime
     assert type(saved_topic["updated_at"]) == datetime
+
     topic_repository.delete_topic(topic.id)
 
 def test_delete_topic():

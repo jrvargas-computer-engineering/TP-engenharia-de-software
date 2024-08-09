@@ -31,27 +31,26 @@ def test_create_review():
 
 def test_delete_review():
         
-        review = Review(str(uuid4()), "Review 1", "Description 1", "Owner 1", "Prestador de Serviço")
-        print(review)
-        review_repository = ReviewRepository()
-        review_repository.save_review(review)
-    
-        saved_review = review_repository.get_review(review.id)
-    
-        assert saved_review is not None
-        assert saved_review["title"] == review.title
-        assert saved_review["id"] == review.id
-        assert saved_review["content"] == review.content
-        assert saved_review["owner"] == review.owner
-        assert saved_review["created_at"] is not None
-        assert saved_review["updated_at"] is not None
-        assert type(saved_review["created_at"]) == datetime
-        assert type(saved_review["updated_at"]) == datetime
+    review = Review(str(uuid4()), "Review 1", "Description 1", "Owner 1", "Prestador de Serviço")
+    print(review)
+    review_repository = ReviewRepository()
+    review_repository.save_review(review)
 
-    
-        review_repository.delete_review(review.id)
-    
-        saved_review = review_repository.get_review(review.id)
-    
-        assert saved_review is None
-        assert saved_review != review.__dict__
+    saved_review = review_repository.get_review(review.id)
+
+    assert saved_review is not None
+    assert saved_review["title"] == review.title
+    assert saved_review["id"] == review.id
+    assert saved_review["content"] == review.content
+    assert saved_review["owner"] == review.owner
+    assert saved_review["created_at"] is not None
+    assert saved_review["updated_at"] is not None
+    assert type(saved_review["created_at"]) == datetime
+    assert type(saved_review["updated_at"]) == datetime
+
+
+    review_repository.delete_review(review.id)
+
+    saved_review = review_repository.get_review(review.id)
+
+    assert saved_review is None
