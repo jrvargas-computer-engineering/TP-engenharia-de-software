@@ -1,23 +1,16 @@
 /* src/components/Opinion.css */
-.opinion {
-    border: 1px solid #ccc;
-    padding: 16px;
-    margin: 16px;
-    border-radius: 8px;
-    box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.1);
+.opinion-box {
+   width: 95%;
+   margin: auto;
   }
   
-  .opinion h1 {
-    font-size: 24px;
-    margin-bottom: 8px;
-  }
-  
-  .opinion h2 {
-    font-size: 20px;
-    margin-bottom: 8px;
-  }
-  
-  .opinion p {
-    font-size: 16px;
-  }
-  
+.opinion-header{
+    width: 100%;
+    margin: auto;
+}
+
+
+.opinion-content{
+    width: 100%;
+    margin: auto;
+}

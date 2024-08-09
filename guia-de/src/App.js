@@ -11,6 +11,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 
 function App() {
+  const data = require('.//data/guides.json');
   return (
     <div className="App">
       <header className="App-header">
@@ -18,7 +19,7 @@ function App() {
           <Routes>
             <Route exact path="/" element={<MenuTest/>}/>
             <Route path="/Home" element={<Home/>}/>
-            <Route path="/Guide" element={<Guide/>}/>
+            <Route path="/Guide" element={<Guide guideData={data}/>}/>
             <Route path="/Search" element ={<Search/>}/>
             <Route path="/MyAccount" element={<MyAccount/>}/>
             <Route path="/AddGuide" element={<AddGuide/>}/>

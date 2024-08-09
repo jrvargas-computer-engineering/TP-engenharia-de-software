@@ -1,20 +1,85 @@
 // src/pages/Guide.js
-import React from 'react';
-import  Opinion from '../../components/Opinion/Opinion';
+import React, { useState, useEffect } from 'react';
+import './Guide.css';
+import Section from '../../components/Section/Section';
 
-export function Guide() {
+function transformGuideSections(guideData) {
+  return guideData.GuideSections.map(section => {
+      return {
+          title: section.title,
+          hierarchy: section.hierarchy,
+          topics: section.topics.map(topic => {
+              const opinions = topic.opinions?.map(opinion => ({
+                  title: opinion.title,
+                  user: opinion.user,
+                  content: opinion.content
+              })) || [];
+
+              let childTopics = [];
+              if (topic.childTopics) {
+                  childTopics = section.topics
+                      .filter(child => child.parentId === topic.id)
+                      .map(child => ({
+                          ...child,
+                          opinions: child.opinions?.map(opinion => ({
+                              title: opinion.title,
+                              user: opinion.user,
+                              content: opinion.content
+                          })) || [],
+                          childTopics: [],
+                          hierarchy: child.hierarchy// Define hierarchy como 1 para childTopics
+                      }));
+              }
+
+              return {
+                  ...topic,
+                  opinions: opinions,
+                  childTopics: childTopics,
+              };
+          })
+      };
+  });
+}
+
+
+
+export function Guide({ guideData }) {
+
+  const [sections, setSections] = useState([]);
+
+  useEffect(() => {
+      if (guideData) {
+          const transformedSections = transformGuideSections(guideData);
+          setSections(transformedSections);
+      }
+  }, [guideData]);
+
+
+
   return (
-    <div>
-      <Opinion 
-        title="Título 1" 
-        subtitle="Subtítulo 1" 
-        text="Este é o texto do primeiro cartão."
-      />
-      <Opinion 
-        title="Título 2" 
-        subtitle="Subtítulo 2" 
-        text="Este é o texto do segundo cartão."
-      />
+    <div className='guide-container'>
+      <div className="main-container">
+
+        <div className="search-container">
+        </div>
+
+        <div className="title-container"> 
+          <h1 className="main-title">{guideData.guideName}</h1>
+        </div>
+
+        <div className='content-container'>
+          <div className="grid-container">
+               {sections && sections.length > 0 && sections.map((section, index) => (
+                <Section
+                    key={index}
+                    title={section.title}
+                    topics={section.topics.filter(topic => topic.hierarchy === 0)} // Filtra para renderizar apenas tópicos principais
+                />
+            ))}
+          </div>
+        </div>
+
+      </div>
     </div>
   );
 }

@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,100..1000&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -11,3 +13,88 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.small-text{
+  font-family: 'Roboto Flex', sans-serif;
+  font-size: 15px;
+  color: #f2f2f2;
+  margin: 0px; 
+  text-align: left;
+}
+
+.small-title{
+  font-family: 'Roboto Flex', sans-serif;
+  font-size: 15px;
+  font-weight: bold;
+  color: #f2f2f2;
+  margin: 0px; 
+  text-align: left;
+}
+
+.small-user{
+  font-family: 'Roboto Flex', sans-serif;
+  font-size: 15px;
+  color: #f2f2f2;
+  font-weight: normal;
+  margin: 0px; 
+  text-align: left;
+}
+
+.medium-title{
+  font-family: 'Roboto Flex', sans-serif;
+  font-size: 18px;
+  font-weight: bold;
+  color: #f2f2f2;
+  margin: 0px; 
+  text-align: left;
+}
+
+.large-title{
+  font-family: 'Roboto Flex', sans-serif;
+  font-size: 22px;
+  font-weight: bold;
+  color: #f2f2f2;
+  margin: 0px; 
+  text-align: left;
+}
+
+.stylized-title{
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 40px;
+  font-weight: 400;
+  font-style: normal;
+  color: #f2f2f2;
+  margin: 0px;
+  margin-left: 10px; 
+  text-align: left;
+}
+
+.main-title{
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 80px;
+  font-weight: 400;
+  font-style: normal;
+  color: #f2f2f2;
+  margin: 0px;
+  text-align: center;
+}
+
+
+.parent-icon{
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 20;  
+  padding: 2px;
+}
+
+.child-icon{
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 20;  
+  padding: 2px;
+}
+
