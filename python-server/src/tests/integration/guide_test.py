@@ -11,7 +11,7 @@ from infra.repository.guide_repository import GuideRepository
 
 def test_create_guide():
     
-        guide = Guide(str(uuid4()), "Guide 1", Location("Porto Alegre", "Rio Grande do Sul", "Brazil").__dict__, "Type 1", "Description 1", "Owner 1", ["Section 1", "Section 2"], "Visibility 1", True)
+        guide = Guide(str(uuid4()), "Guide 1", Location("Porto Alegre", "Rio Grande do Sul", "Brazil").__dict__, "Type 1", "Description 1", "Owner 1", [str(uuid4()), str(uuid4())], "Visibility 1", True)
         print(guide)
         guide_repository = GuideRepository()
         guide_repository.save(guide)
