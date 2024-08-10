@@ -12,7 +12,7 @@ from infra.repository.section_repository import SectionRepository
 
 def test_create_section():
         
-        topics = [Topic(str(uuid4()), "Topic 1"), Topic(str(uuid4()), "Topic 2")]
+        topics = [Topic(str(uuid4()), "Topic 1", 2, []), Topic(str(uuid4()), "Topic 2", 1, [str(uuid4()), str(uuid4())])]
         section = Section(str(uuid4()), "Section 1", topics)
         print(section)
         section_repository = SectionRepository()
@@ -34,7 +34,7 @@ def test_create_section():
 
 def test_delete_section():
             
-            topics = [Topic(str(uuid4()), "Topic 1"), Topic(str(uuid4()), "Topic 2")]
+            topics = [Topic(str(uuid4()), "Topic 1", 1, []), Topic(str(uuid4()), "Topic 2", 2, [str(uuid4()), str(uuid4())])]
             section = Section(str(uuid4()), "Section 1", topics)
             print(section)
             section_repository = SectionRepository()
