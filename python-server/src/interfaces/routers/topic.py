@@ -27,7 +27,7 @@ async def create_topic(input: CreateTopicInput):
 async def get_topics(input: IdTopicInput):
     try:
         topic_repository = TopicRepository()
-        topic = topic_repository.get_topic(input.id)
+        topic = topic_repository.get(input.id)
         return topic
     except Exception as e:
         print(f"Error: {e}")
@@ -37,7 +37,7 @@ async def get_topics(input: IdTopicInput):
 async def delete_topic(input: IdTopicInput):
     try:
         topic_repository = TopicRepository()
-        topic_repository.delete_topic(input.id)
+        topic_repository.delete(input.id)
         return {"status": "ok"}
     except Exception as e:
         print(f"Error: {e}")

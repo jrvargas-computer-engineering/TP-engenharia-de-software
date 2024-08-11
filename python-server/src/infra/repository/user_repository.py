@@ -9,13 +9,13 @@ class UserRepository:
         self.db = DatabaseConnection().connect()
         self.collection = self.db["users"] 
 
-    def save_user(self, user: User):
+    def save(self, user: User):
         self.collection.insert_one(user.__dict__)
 
-    def delete_user(self, id):
+    def delete(self, id):
         self.collection.delete_one({"id": id})
 
-    def get_user(self, id):
+    def get(self, id):
         document = self.collection.find_one({"id": id})
         if document:
             document["_id"] = str(document["_id"])

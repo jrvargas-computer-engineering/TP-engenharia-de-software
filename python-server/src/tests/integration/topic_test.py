@@ -14,9 +14,9 @@ def test_create_topic():
     topic = Topic(str(uuid4()), "Topic 1", 2, [])
     print(topic)
     topic_repository = TopicRepository()
-    topic_repository.save_topic(topic)
+    topic_repository.save(topic)
 
-    saved_topic = topic_repository.get_topic(topic.id)
+    saved_topic = topic_repository.get(topic.id)
 
     assert saved_topic is not None
     assert saved_topic["title"] == topic.title
@@ -26,16 +26,16 @@ def test_create_topic():
     assert type(saved_topic["created_at"]) == datetime
     assert type(saved_topic["updated_at"]) == datetime
 
-    topic_repository.delete_topic(topic.id)
+    topic_repository.delete(topic.id)
 
 def test_delete_topic():
     
     topic = Topic(str(uuid4()), "Topic 1", 1, [str(uuid4()), str(uuid4())])
     print(topic)
     topic_repository = TopicRepository()
-    topic_repository.save_topic(topic)
+    topic_repository.save(topic)
 
-    saved_topic = topic_repository.get_topic(topic.id)
+    saved_topic = topic_repository.get(topic.id)
 
     assert saved_topic is not None
     assert saved_topic["title"] == topic.title
@@ -45,9 +45,9 @@ def test_delete_topic():
     assert type(saved_topic["created_at"]) == datetime
     assert type(saved_topic["updated_at"]) == datetime
     
-    topic_repository.delete_topic(topic.id)
+    topic_repository.delete(topic.id)
 
-    saved_topic = topic_repository.get_topic(topic.id)
+    saved_topic = topic_repository.get(topic.id)
 
     assert saved_topic is None
     assert saved_topic != topic.__dict__

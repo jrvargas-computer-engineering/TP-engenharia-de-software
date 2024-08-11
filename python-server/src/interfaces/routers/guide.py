@@ -46,8 +46,10 @@ async def get_guides(input: GuideIdInput):
 async def delete_guide(input: GuideIdInput):
     try:
         guide_repository = GuideRepository()
-        guide_repository.delete_guide(input.id) 
+        guide_repository.delete(input.id) 
         return {"status": "ok"}
     except Exception as e:
         print(f"Error: {e}")
         raise HTTPException(status_code=500, detail="Erro ao deletar o guia")
+    
+    

@@ -12,9 +12,9 @@ def test_create_authenticated_user():
 
     user = AuthenticatedUser("jp", str(uuid4()), "jp.corso123@gmail.com")
     user_repository = UserRepository()
-    user_repository.save_user(user)
+    user_repository.save(user)
 
-    saved_user = user_repository.get_user(user.id)
+    saved_user = user_repository.get(user.id)
 
     assert saved_user is not None
     assert saved_user["username"] == user.username
@@ -25,15 +25,15 @@ def test_create_authenticated_user():
     assert type(saved_user["created_at"]) == datetime
     assert type(saved_user["updated_at"]) == datetime
 
-    user_repository.delete_user(user.id)
+    user_repository.delete(user.id)
 
 def test_create_anoymous_user():
     
     user = AnonymousUser("jp", str(uuid4()))
     user_repository = UserRepository()
-    user_repository.save_user(user)
+    user_repository.save(user)
 
-    saved_user = user_repository.get_user(user.id)
+    saved_user = user_repository.get(user.id)
 
     assert saved_user is not None
     assert saved_user["username"] == user.username
@@ -43,6 +43,6 @@ def test_create_anoymous_user():
     assert type(saved_user["created_at"]) == datetime
     assert type(saved_user["updated_at"]) == datetime
 
-    user_repository.delete_user(user.id)
+    user_repository.delete(user.id)
 
     

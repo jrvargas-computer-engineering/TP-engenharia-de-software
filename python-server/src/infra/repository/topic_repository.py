@@ -9,13 +9,13 @@ class TopicRepository:
         self.db = DatabaseConnection().connect()
         self.collection = self.db["topics"] 
 
-    def save_topic(self, topic: Topic):
+    def save(self, topic: Topic):
         self.collection.insert_one(topic.__dict__)
 
-    def delete_topic(self, id):
+    def delete(self, id):
         self.collection.delete_one({"id": id})
 
-    def get_topic(self, id):
+    def get(self, id):
         document = self.collection.find_one({"id": id})
         if document:
             document["_id"] = str(document["_id"])

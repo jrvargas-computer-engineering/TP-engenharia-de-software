@@ -16,9 +16,9 @@ def test_create_section():
         section = Section(str(uuid4()), "Section 1", topics)
         print(section)
         section_repository = SectionRepository()
-        section_repository.save_section(section)
+        section_repository.save(section)
     
-        saved_section = section_repository.get_section(section.id)
+        saved_section = section_repository.get(section.id)
     
         assert saved_section is not None
         assert saved_section["title"] == section.title
@@ -29,7 +29,7 @@ def test_create_section():
         assert type(saved_section["updated_at"]) == datetime
         assert saved_section["topics"] == [topic.get_id() for topic in topics]
 
-        section_repository.delete_section(section.id)
+        section_repository.delete(section.id)
 
 
 def test_delete_section():
@@ -38,9 +38,9 @@ def test_delete_section():
             section = Section(str(uuid4()), "Section 1", topics)
             print(section)
             section_repository = SectionRepository()
-            section_repository.save_section(section)
+            section_repository.save(section)
         
-            saved_section = section_repository.get_section(section.id)
+            saved_section = section_repository.get(section.id)
         
             assert saved_section is not None
             assert saved_section["title"] == section.title
@@ -51,9 +51,9 @@ def test_delete_section():
             assert type(saved_section["updated_at"]) == datetime
             assert saved_section["topics"] == [topic.get_id() for topic in topics]
         
-            section_repository.delete_section(section.id)
+            section_repository.delete(section.id)
         
-            saved_section = section_repository.get_section(section.id)
+            saved_section = section_repository.get(section.id)
         
             assert saved_section is None
             assert saved_section != section.__dict__

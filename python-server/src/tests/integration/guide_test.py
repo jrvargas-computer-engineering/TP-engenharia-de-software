@@ -16,7 +16,7 @@ def test_create_guide():
         guide_repository = GuideRepository()
         guide_repository.save(guide)
     
-        saved_guide = guide_repository.get_guide(guide.id)
+        saved_guide = guide_repository.get(guide.id)
     
         assert saved_guide is not None
         assert saved_guide["name"] == guide.name
@@ -33,7 +33,7 @@ def test_create_guide():
         assert type(saved_guide["created_at"]) == datetime
         assert type(saved_guide["updated_at"]) == datetime
 
-        guide_repository.delete_guide(guide.id)
+        guide_repository.delete(guide.id)
 
 
     

@@ -9,13 +9,13 @@ class ReviewRepository:
         self.db = DatabaseConnection().connect()
         self.collection = self.db["reviews"] 
 
-    def save_review(self, review: Review):
+    def save(self, review: Review):
         self.collection.insert_one(review.__dict__)
 
-    def delete_review(self, id):
+    def delete(self, id):
         self.collection.delete_one({"id": id})
 
-    def get_review(self, id):
+    def get(self, id):
         document = self.collection.find_one({"id": id})
         if document:
             document["_id"] = str(document["_id"])

@@ -10,7 +10,7 @@ class SectionRepository:
         self.db = DatabaseConnection().connect()
         self.collection = self.db["sections"] 
 
-    def save_section(self, section: Section):
+    def save(self, section: Section):
 
         topics = section.get_topics()
         topic_ids = [topic.get_id() for topic in topics]
@@ -24,11 +24,11 @@ class SectionRepository:
         }
         self.collection.insert_one(simple_section)
 
-    def get_section(self, id):
+    def get(self, id):
         document = self.collection.find_one({"id": id})
         if document:
             document["_id"] = str(document["_id"])
         return document
 
-    def delete_section(self, id):
+    def delete(self, id):
         self.collection.delete_one({"id": id})

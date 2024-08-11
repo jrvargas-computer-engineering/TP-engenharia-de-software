@@ -11,4 +11,4 @@ def exec(input):
         children_topics=input.children_topics,
     )
     topic_repository = TopicRepository()
-    topic_repository.save_topic(topic)
+    topic_repository.save(topic)
