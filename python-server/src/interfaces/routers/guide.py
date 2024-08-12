@@ -3,7 +3,7 @@ sys.path.append('../../')
 
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
-from usecases import save_guide_usecase
+from usecases import create_guide_usecase
 from infra.repository.guide_repository import GuideRepository
 
 guide_router = APIRouter()
@@ -27,10 +27,10 @@ class CreateGuideInput(BaseModel):
 class GuideIdInput(BaseModel):
     id: str
 
-@guide_router.post("/save")
-async def save_guide(input: CreateGuideInput):   
+@guide_router.post("/create")
+async def create_guide(input: CreateGuideInput):   
     try:
-        save_guide_usecase.exec(input)
+        create_guide_usecase.exec(input)
         return {"status": "ok"}
     except Exception as e:
         print(f"Error: {e}")
