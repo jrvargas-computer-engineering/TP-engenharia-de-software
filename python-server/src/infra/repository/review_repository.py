@@ -20,3 +20,6 @@ class ReviewRepository:
         if document:
             document["_id"] = str(document["_id"])
         return document
+    
+    def update(self, review):
+        self.collection.update_one({"id": review.get_id()}, {"$set": review.__dict__})
