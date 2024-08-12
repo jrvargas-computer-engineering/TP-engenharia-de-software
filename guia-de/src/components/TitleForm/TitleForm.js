@@ -1,18 +1,18 @@
 // src/components/TitleForm.js
 import React from 'react';
+import './TitleForm.css';
+ 
 
 function TitleForm() {
   return (
-    <div className="form-container">
+    <div className="form-title-container form-style">
         <div className='title-box'>
             <form>
-                <div className='title-content'>
-                    <label>Título aqui</label>
-                </div>
+                <input className="medium-text label-form"  type="text" id="title" name="title" />            
             </form>
         </div>
         <div className='button-box'>
-            <button>PUBLICAR</button>
+            <button className="button-medium small-stylized-title">PUBLICAR</button>
         </div>
     </div>
   );

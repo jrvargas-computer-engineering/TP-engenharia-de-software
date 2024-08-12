@@ -2,12 +2,13 @@
 import React, { useState, useEffect } from 'react';
 import './Guide.css';
 import Section from '../../components/Section/Section';
+import TitleForm from '../../components/TitleForm/TitleForm';
+
 
 function transformGuideSections(guideData) {
   return guideData.GuideSections.map(section => {
       return {
           title: section.title,
-          hierarchy: section.hierarchy,
           topics: section.topics.map(topic => {
               const opinions = topic.opinions?.map(opinion => ({
                   title: opinion.title,
@@ -15,6 +16,8 @@ function transformGuideSections(guideData) {
                   content: opinion.content
               })) || [];
 
+              let hierarchy = -1; 
+              let topicId = -1; 
               let childTopics = [];
               if (topic.childTopics) {
                   childTopics = section.topics
@@ -27,14 +30,19 @@ function transformGuideSections(guideData) {
                               content: opinion.content
                           })) || [],
                           childTopics: [],
-                          hierarchy: child.hierarchy// Define hierarchy como 1 para childTopics
+                          hierarchy: child.hierarchy,
+                          topicId: child.id
                       }));
               }
-
+              hierarchy = topic.hierarchy;
+              topicId = topic.id
               return {
-                  ...topic,
-                  opinions: opinions,
-                  childTopics: childTopics,
+                ...topic,
+                opinions: opinions,
+                childTopics: childTopics,
+                id: topicId,
+                hierarchy: hierarchy,
+
               };
           })
       };
@@ -69,8 +77,9 @@ export function Guide({ guideData }) {
 
         <div className='content-container'>
           <div className="grid-container">
-               {sections && sections.length > 0 && sections.map((section, index) => (
-                <Section
+
+              {sections && sections.length > 0 && sections.map((section, index) => (
+              <Section
                     key={index}
                     title={section.title}
                     topics={section.topics.filter(topic => topic.hierarchy === 0)} // Filtra para renderizar apenas tópicos principais
