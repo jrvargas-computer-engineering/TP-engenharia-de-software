@@ -1,6 +1,6 @@
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
-from usecases import save_topic_usecase
+from usecases import create_topic_usecase
 from infra.repository.topic_repository import TopicRepository
 
 topic_router = APIRouter()
@@ -17,7 +17,7 @@ class IdTopicInput(BaseModel):
 @topic_router.post("/create")
 async def create_topic(input: CreateTopicInput):
     try:
-        save_topic_usecase.exec(input)
+        create_topic_usecase.exec(input)
         return {"status": "ok"}
     except Exception as e:
         print(f"Error: {e}")

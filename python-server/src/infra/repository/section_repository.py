@@ -2,7 +2,6 @@ import sys
 sys.path.append('../')
 
 from models.section import Section
-from models.topic import Topic
 from infra.database.database_connection import DatabaseConnection
 
 class SectionRepository:
@@ -12,13 +11,12 @@ class SectionRepository:
 
     def save(self, section: Section):
 
-        topics = section.get_topics()
-        topic_ids = [topic.get_id() for topic in topics]
+        topics_ids = section.get_topics()
         
         simple_section = {
             "id": section.get_id(),
             "title": section.get_title(),
-            "topics": topic_ids,
+            "topics": topics_ids,
             "created_at": section.get_created_at(),
             "updated_at": section.get_updated_at()
         }
@@ -32,3 +30,6 @@ class SectionRepository:
 
     def delete(self, id):
         self.collection.delete_one({"id": id})
+
+    def update(self, input):
+        self.collection.update_one({"id": input.id}, {"$set": section_data})
