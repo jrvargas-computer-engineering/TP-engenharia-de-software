@@ -3,7 +3,7 @@ sys.path.append('../../')
 
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
-from usecases import create_section_usecase
+from usecases import create_section_usecase, update_section_usecase
 from infra.repository.section_repository import SectionRepository
 
 section_router = APIRouter()
@@ -44,8 +44,7 @@ async def delete_section(input: SectionIdInput):
 @section_router.post("/update")
 async def update_section(input: CreateSectionInput):
     try:
-        section_repository = SectionRepository()
-        section_repository.update(input) 
+        update_section_usecase.exec(input)
         return {"status": "ok"}
     except Exception as e:
         print(f"Error: {e}")

@@ -31,5 +31,5 @@ class SectionRepository:
     def delete(self, id):
         self.collection.delete_one({"id": id})
 
-    def update(self, input):
-        self.collection.update_one({"id": input.id}, {"$set": section_data})
+    def update(self, section):
+        self.collection.update_one({"id": section.get_id()}, {"$set": section.__dict__})
