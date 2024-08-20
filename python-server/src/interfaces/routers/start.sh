@@ -1,1 +1,1 @@
-uvicorn server:app --reload --port 3336 
+uvicorn server:app --reload --port 4000 
