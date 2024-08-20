@@ -1,0 +1,18 @@
+:root {
+    --main-color: #151F29; 
+    --secundary-color:#FF493B;
+    --tertiary-color: #FFFBF4;
+    --text-main-color: #F7F9F8;
+    --text-secundary-color: #F7F9F8;
+  }
+
+
+/*
+:root {
+  --main-color: #FFF9D9; 
+  --secundary-color:#151F29;
+  --tertiary-color: #151F29;
+  --text-main-color: #151F29;
+  --text-secundary-color: #FFF9D9;
+}
+*/

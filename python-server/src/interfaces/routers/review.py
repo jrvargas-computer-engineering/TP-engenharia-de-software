@@ -15,8 +15,7 @@ class ReviewIdInput(BaseModel):
 class CreateReviewInput(BaseModel):
     id: str
     content: str
-    owner: str
-    service_provider: Optional[str] = None
+    title: str
 
 @review_router.post("/create")
 async def create_review(input: CreateReviewInput): 

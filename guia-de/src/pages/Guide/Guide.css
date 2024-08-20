@@ -1,0 +1,36 @@
+/* src/pages/Guide.css */
+.guide-container{
+  display: flex;
+  justify-content: center;
+  /*background-color: cadetblue;*/
+}
+
+.main-container {
+  width: 70%;
+  justify-content: center;
+}
+
+.search-container {
+  /*background-color: lightblue;*/
+  height: 200px;
+}
+/*
+.title-container {
+  background-color: chartreuse;
+}
+*/
+
+/*
+.content-container{
+  background-color: violet;
+}
+*/
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 30px;
+    /*background-color: gainsboro;*/
+    margin: 0;
+    align-items: center; /* Centraliza os itens verticalmente */
+  }
+
