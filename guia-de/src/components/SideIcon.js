@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 
-export function SideIcon() {
+function SideIcon() {
   return (
     <div className='App-side-bar'>
       <Link to='/MyAccount'>
@@ -14,3 +14,5 @@ export function SideIcon() {
     </div>
   );
 }
+
+export default SideIcon;
