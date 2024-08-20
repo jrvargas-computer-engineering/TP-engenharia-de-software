@@ -81,7 +81,6 @@ function OpinionForm(topicId) {
         const review = getReviewData(reviewId);
 
         console.log("ReviewData: ", review);
-
         
         const addReviewToJson = (jsonData, topicId, reviewData) => {
           console.log("topic id antes do push: ", topicId.topicId)

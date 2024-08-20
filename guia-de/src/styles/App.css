@@ -1,30 +1,32 @@
+@import 'colors.css';  
+
 .App {
   width: 100%;
   height:100vh;
   text-align: center;
-  background-color: #151F29
+  background-color: var(--main-color)
 }
 
 
 .App-header {
-  background-color: #151F29;
+  background-color: var(--main-color);
   display: flex;
   flex-direction: column;
   align-content: start;
   align-items: center;
   justify-content: center;
-  color: white;
+  color: var(--tertiary-color);
 }
 
 .App-search-component {
   display: flex;
   width: 65%;
   font-size: calc(10px + 2vmin);
-  border: solid 1px #ff493b;
+  border: solid 1px var(--secundary-color);
   border-radius: 100px;
-  color: #ff493b;
-  border-color: #ff493b;
-  background-color: #151F29;
+  color: var(--secundary-color);
+  border-color: var(--secundary-color);
+  background-color: var(--main-color);
   margin: 15px;
   padding: 0;
 }
@@ -35,8 +37,8 @@
   font-size: calc(10px + 2vmin);
   border: none;
   outline: none;
-  color: #b8b3b3;
-  background-color: #151F29;
+  color: var(--tertiary-color);
+  background-color: var(--main-color);
   padding: 0;
 }
 
@@ -45,10 +47,10 @@
   width: 15vw;
   align-self:auto;
   justify-content: center;
-  background-color: #151F29;
-  border: solid 1px #ff493b;
+  background-color: var(--main-color);
+  border: solid 1px var(--secundary-color);
   border-radius: 100px;
-  color: rgb(180, 176, 176);
+  color: var(--tertiary-color);
   font-size: 2vw;
   padding: 0.2rem;
   margin: 10px;
@@ -71,7 +73,7 @@
 }
 
 .App-title {
-  background-color: #151F29;
+  background-color: var(--main-color);
   width: 70%;
   font-family: "Bebas Neue", sans-serif;
   font-weight: 400;
@@ -81,7 +83,7 @@
   align-items: start;
   justify-content: left;
   font-size: calc(0.08*100vw);
-  color: #ff493b;
+  color: var(--secundary-color);
   margin-top: 10vh;
   margin-bottom: 0;
 }
@@ -123,5 +125,5 @@
 .App-search-icon {
   font-size: 1.5rem;
   margin-right: 0.5rem;
-  color: white;
+  color:var(--tertiary-color);
 }

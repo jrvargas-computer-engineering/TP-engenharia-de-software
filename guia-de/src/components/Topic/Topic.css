@@ -4,8 +4,21 @@
 */
 .header-topic{
     /*background-color: tomato;*/
+}
+
+.title-form-container {
+    width: 100%;
     display: flex;
     align-items: center;
+    justify-content: center;
+}
+.title-form-box{
+    width: 95%;
+}
+
+#container-button-subtopic {
+    margin-top: 5px;
+    margin-left: 0px;
 }
 
 .content-topic-container{
@@ -40,10 +53,13 @@
     display: flex;
     width: 100%;
     align-items: center;
-    padding: 20px;
+    justify-content: center;
 }
 
 .form-box {
-    width: 100%;
+    width: 95%;
     height: 100%;
 }
+
+
+
