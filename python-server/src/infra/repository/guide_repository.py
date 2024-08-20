@@ -20,3 +20,8 @@ class GuideRepository:
         if document:
             document["_id"] = str(document["_id"])
         return document
+    
+    def search_by_name(self, name):
+        logging.info(f"Searching for guides with name: {name}")
+        results = self.collection.find({"name": {"$regex": name, "$options": "i"}})
+        return [result for result in results]

@@ -27,6 +27,9 @@ class CreateGuideInput(BaseModel):
 class GuideIdInput(BaseModel):
     id: str
 
+class SearchInput(BaseModel):
+    name: str
+
 @guide_router.post("/create")
 async def create_guide(input: CreateGuideInput):   
     try:
@@ -52,4 +55,18 @@ async def delete_guide(input: GuideIdInput):
         print(f"Error: {e}")
         raise HTTPException(status_code=500, detail="Erro ao deletar o guia")
     
-    
+import logging
+
+# Configure logging
+logging.basicConfig(level=logging.INFO)
+
+@guide_router.get("/search")
+async def search_guides(name: str):
+    logging.info(f"Searching guides with name: {name}")
+    guide_repository = GuideRepository()
+    guides = guide_repository.search_by_name(name) 
+    if not guides:
+        logging.info("No guides found.")
+    else:
+        logging.info(f"Found {len(guides)} guides.")
+    return guides
