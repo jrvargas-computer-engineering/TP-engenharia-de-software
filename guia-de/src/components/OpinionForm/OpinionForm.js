@@ -1,6 +1,55 @@
 import React, { useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import './OpinionForm.css';
 // src/components/TitleForm.js
+
+async function postReviewData(reviewData) {
+    const url = 'http://localhost:3336/review/create';
+    
+    try {
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(reviewData)
+        });
+
+        if (!response.ok) {
+            throw new Error('Erro na requisição: ' + response.statusText);
+        }
+
+        const data = await response.json();
+        console.log('Resposta do servidor:', data);
+    } catch (error) {
+        console.error('Erro ao fazer o POST:', error);
+    }
+}
+
+async function getReviewData() {
+    const url = 'http://localhost:3336/review';
+
+    try {
+        const response = await fetch(url, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error('Erro na requisição: ' + response.statusText);
+        }
+
+        const data = await response.json();
+        console.log('Dados recebidos do servidor:', data);
+        return data;
+    } catch (error) {
+        console.error('Erro ao fazer o GET:', error);
+    }
+}
+
+
 
 function OpinionForm(topicId) {    
 
@@ -20,12 +69,18 @@ function OpinionForm(topicId) {
 
         setIsVisible(!isVisible); 
 
-        const reviewData = {
-            reviewTitle: title,
-            reviewContent: content,
-            user: "@anonimo"
+        const reviewId =`${uuidv4()}`
 
+        const reviewData = {
+            title: title,
+            content: content,
+            id: reviewId
         };
+
+        postReviewData(reviewData);
+        const review = getReviewData(reviewId);
+
+        console.log("ReviewData: ", review);
         
         const addReviewToJson = (jsonData, topicId, reviewData) => {
           console.log("topic id antes do push: ", topicId.topicId)

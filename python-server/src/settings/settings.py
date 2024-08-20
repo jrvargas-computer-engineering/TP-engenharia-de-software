@@ -14,6 +14,7 @@ if not load_dotenv(dotenv_path=env_path, override=True):
 
 try:
     MONGO_URI = os.environ.get("MONGO_URI")
+    GOOGLE_CLIENT_ID = os.environ.get("GOOGLE_CLIENT_ID")
 except Exception as e:
     print(f"Erro ao carregar as variáveis de ambiente: {e}")
 

@@ -2,12 +2,11 @@ from uuid import uuid4
 from datetime import datetime  # Adicionar importação de datetime
 
 class Review:
-    def __init__(self, id, title, content, owner, service_provider):
-        self.service_provider = service_provider
+    def __init__(self, id, title, content):
         self.id = id
         self.title = title
         self.content = content
-        self.owner = owner
+        self.owner = str(uuid4())
         self.created_at = datetime.now()  # Substituir str(uuid4()) por datetime.now()
         self.updated_at = datetime.now()  # Substituir str(uuid4()) por datetime.now()
 
@@ -29,9 +28,7 @@ class Review:
     def get_updated_at(self):
         return self.updated_at
     
-    def get_service_provider(self):
-        return self.service_provider
-    
+
     def set_id(self, id):
         self.id = id
 
@@ -44,8 +41,6 @@ class Review:
     def set_owner(self, owner):
         self.owner = owner
 
-    def set_service_provider(self, service_provider):
-        self.service_provider = service_provider
 
     def set_created_at(self):
         self.created_at = datetime.now()  # Substituir str(uuid4()) por datetime.now()

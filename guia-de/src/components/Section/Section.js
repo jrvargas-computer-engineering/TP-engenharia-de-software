@@ -53,6 +53,7 @@ function Section({title, topics, sectionId}) {
             </div>
         </div>
     );
+
 }
 
 export default Section;

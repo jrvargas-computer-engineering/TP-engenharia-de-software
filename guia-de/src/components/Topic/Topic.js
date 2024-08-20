@@ -6,7 +6,6 @@ import OpinionForm from '../../components/OpinionForm/OpinionForm';
 import TitleForm from '../../components/TitleForm/TitleForm';
 
 
-
 const addGoogleFontLink = () => {
     const link = document.createElement('link');
     link.href = "https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200";
@@ -23,7 +22,6 @@ export function Topic({title, opinions, childTopics, hierarchy, topicId}) {
     const toggleVisibility = () => {
         setIsVisible(!isVisible); 
       };
-
 
     useEffect(() => {
         addGoogleFontLink();
@@ -71,6 +69,7 @@ export function Topic({title, opinions, childTopics, hierarchy, topicId}) {
                     <div className='form-box'>
                         <OpinionForm topicId = {topicId}/>
                     </div>
+
                 </div>
             </div>
             <div className='child-topics-container'>

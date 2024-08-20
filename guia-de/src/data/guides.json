@@ -11,11 +11,13 @@
          "topics": [
             {
                 "id": 1.1,
+
                 "title": "Topic 1",
                 "childTopics": false,
                 "hierarchy":0, 
                 "parentId": null,
                 "sectionParent":1, 
+
                 "opinions": [
                     {
                       "title": "Profissional eficiente",
@@ -41,6 +43,7 @@
                 "hierarchy":0, 
                 "parentId": null,
                 "sectionParent":1,
+
                 "opinions": [
                     {
                       "title": "Profissional eficiente",
@@ -57,7 +60,6 @@
                 "parentId": null,
                 "sectionParent":1,
                 "opinions": []
-                
             },
             {
                 "id": 1.4,

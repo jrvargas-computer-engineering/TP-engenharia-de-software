@@ -36,6 +36,7 @@ function TitleForm({onClick, isNestedInSection, id, parentId, sectionParent, gui
         console.log(JSON.stringify(jsonResult, null, 2));
       };
 
+
   return (
     <div className="form-title-container form-style">
         <div className='title-box'>
