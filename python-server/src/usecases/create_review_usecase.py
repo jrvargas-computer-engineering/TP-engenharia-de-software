@@ -7,8 +7,6 @@ def exec(input):
             id=input.id,
             title=input.title,
             content=input.content,
-            owner=input.owner,
-            service_provider=input.service_provider,
         )
     
         review_repository = ReviewRepository()

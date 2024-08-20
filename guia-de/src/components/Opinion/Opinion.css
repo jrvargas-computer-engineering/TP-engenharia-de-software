@@ -1,0 +1,16 @@
+/* src/components/Opinion.css */
+.opinion-box {
+   width: 95%;
+   margin: auto;
+  }
+  
+.opinion-header{
+    width: 100%;
+    margin: auto;
+}
+
+
+.opinion-content{
+    width: 100%;
+    margin: auto;
+}
