@@ -4,8 +4,8 @@ import './OpinionForm.css';
 // src/components/TitleForm.js
 
 async function postReviewData(reviewData) {
-    const url = 'https://6qd4q9qt-4000.brs.devtunnels.ms/3336/review/create';
-    
+    const url = 'https://6qd4q9qt-4000.brs.devtunnels.ms/review/create';
+
     try {
         const response = await fetch(url, {
             method: 'POST',
@@ -27,8 +27,7 @@ async function postReviewData(reviewData) {
 }
 
 async function getReviewData() {
-    const url = 'https://6qd4q9qt-4000.brs.devtunnels.ms/3336/review';
-
+    const url = 'https://6qd4q9qt-4000.brs.devtunnels.ms/review';
     try {
         const response = await fetch(url, {
             method: 'GET',
