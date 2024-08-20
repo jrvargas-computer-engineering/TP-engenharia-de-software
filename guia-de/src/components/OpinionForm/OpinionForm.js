@@ -4,7 +4,7 @@ import './OpinionForm.css';
 // src/components/TitleForm.js
 
 async function postReviewData(reviewData) {
-    const url = 'https://6qd4q9qt-4000.brs.devtunnels.ms/3336/review/create';
+    const url = 'https://6qd4q9qt-4000.brs.devtunnels.ms/review/create';
     
     try {
         const response = await fetch(url, {
@@ -26,30 +26,27 @@ async function postReviewData(reviewData) {
     }
 }
 
-async function getReviewData() {
-    const url = 'https://6qd4q9qt-4000.brs.devtunnels.ms/3336/review';
-
+async function getReviewData(reviewId) {
+    console.log("ReviewId: ", reviewId);
     try {
-        const response = await fetch(url, {
+        const response = await fetch(`https://6qd4q9qt-4000.brs.devtunnels.ms/review?id=${reviewId}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
-            }
+            },
+            redirect: 'follow'
         });
 
         if (!response.ok) {
-            throw new Error('Erro na requisição: ' + response.statusText);
+            throw new Error('Network response was not ok');
         }
 
         const data = await response.json();
-        console.log('Dados recebidos do servidor:', data);
         return data;
     } catch (error) {
         console.error('Erro ao fazer o GET:', error);
     }
 }
-
-
 
 function OpinionForm(topicId) {    
 
@@ -69,16 +66,14 @@ function OpinionForm(topicId) {
 
         setIsVisible(!isVisible); 
 
-        const reviewId =`${uuidv4()}`
-
         const reviewData = {
             title: title,
             content: content,
-            id: reviewId
+            id: `${uuidv4()}`
         };
 
         postReviewData(reviewData);
-        const review = getReviewData(reviewId);
+        const review = getReviewData(reviewData.id);
 
         console.log("ReviewData: ", review);
         
