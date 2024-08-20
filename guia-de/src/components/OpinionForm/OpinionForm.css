@@ -1,0 +1,60 @@
+@import '../../styles/colors.css';  
+
+
+.form-opinion-container{
+    margin: 0px;
+    width: 100%; 
+    display: 'flex';
+    flex-direction: 'column-reverse'; 
+    align-items: 'flex-end';
+
+}
+
+.opinion-title-box {
+    width: inherit;
+    height: 15%;
+    overflow: hidden;
+    border-radius: 15px;
+    margin-bottom: 5px;
+    transition: max-height 0.5s ease-out;
+
+    
+}
+.opinion-title-box input {
+    width: 100%;
+    height: 100%;    
+    padding-left: 15px;
+}
+
+.opinion-form-box {
+    border-radius: 10px;
+    box-sizing: border-box; /* Inclui padding na largura e altura */
+    align-items: stretch; /* Garante que o form ocupe toda a altura */
+    resize: none;
+    overflow: hidden;
+    padding: 10px;
+    background-color: var(--tertiary-color);
+    height: 200px;
+}
+
+.form-opinion-container form{
+    height: 100%;
+}
+
+#form-opinion-text {
+    resize: none;
+    color: var(--main-color);
+    outline: none;
+    border: 0px;
+
+    width: 98%;
+}
+
+.opinion-button-box {
+    display: flex;
+    margin-top: 5px;
+    margin-right: 0px;
+    width: 100%;
+    
+}
+

@@ -19,3 +19,8 @@
     width: 95%;
     margin:20px;
 }
+
+.section-title {
+    margin-left: 10px; 
+    text-align: left;
+}

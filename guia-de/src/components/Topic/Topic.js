@@ -2,6 +2,7 @@
 import React, { useEffect } from 'react';
 import './Topic.css';
 import  Opinion from '../../components/Opinion/Opinion';
+import OpinionForm from '../../components/OpinionForm/OpinionForm';
 
 
 
@@ -13,8 +14,10 @@ const addGoogleFontLink = () => {
   };
   
 
-export function Topic({title, opinions, childTopics, hierarchy}) {  
+export function Topic({title, opinions, childTopics, hierarchy, topicId}) {  
     
+    console.log("topic id dentro do topic", topicId);
+
     useEffect(() => {
         addGoogleFontLink();
       }, []);
@@ -34,10 +37,15 @@ export function Topic({title, opinions, childTopics, hierarchy}) {
                     <Opinion key={index} title={opinion.title} user={opinion.user} content={opinion.content} />
                 ))}
             </div>
+            <div className='form-space'>
+                <div className='form-box'>
+                    <OpinionForm topicId = {topicId}/>
+                </div>
+            </div>
             <div className='child-topics-container'>
                 <div className="grid-topics-container">
                     {childTopics && childTopics.length > 0 && childTopics.map((childTopic, index)  => (
-                        <Topic key={index} title={childTopic.title} opinions={childTopic.opinions} childTopics={childTopic.childTopics} hierarchy={childTopic.hierarchy} />
+                        <Topic key={index} title={childTopic.title} opinions={childTopic.opinions} childTopics={childTopic.childTopics} hierarchy={childTopic.hierarchy} topicId={childTopic.id} />
                     ))}
                 </div>
             </div>
