@@ -9,11 +9,14 @@ class GuideRepository:
         self.db = DatabaseConnection().connect()
         self.collection = self.db["guides"] 
 
-    def save_guide(self, guide: Guide):
+    def save(self, guide: Guide):
         self.collection.insert_one(guide.__dict__)
 
-    def delete_guide(self, id):
+    def delete(self, id):
         self.collection.delete_one({"id": id})
 
-    def get_guide(self, id):
-        return self.collection.find_one({"id": id})
+    def get(self, id):
+        document = self.collection.find_one({"id": id})
+        if document:
+            document["_id"] = str(document["_id"])
+        return document

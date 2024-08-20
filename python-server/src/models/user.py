@@ -1,9 +1,12 @@
 from abc import ABC, abstractmethod
+from datetime import datetime
 
 class User(ABC):
     def __init__(self, username, id):
         self.username = username
         self.id = id
+        self.created_at = datetime.now()
+        self.updated_at = datetime.now()
 
     @abstractmethod
     def get_username(self):
@@ -23,6 +26,22 @@ class User(ABC):
 
     @abstractmethod
     def get_type(self):
+        pass
+
+    @abstractmethod
+    def get_created_at(self):
+        pass
+
+    @abstractmethod
+    def get_updated_at(self):
+        pass
+
+    @abstractmethod
+    def set_created_at(self):
+        pass
+
+    @abstractmethod
+    def set_updated_at(self):
         pass
 
     @abstractmethod
@@ -43,14 +62,26 @@ class AnonymousUser(User):
     def set_username(self, username):
         self.username = username
 
-    def set_id(self, id):
-        self.id = id
-    
     def get_type(self):
         return self.type
 
+    def get_created_at(self):
+        return self.created_at
+    
+    def get_updated_at(self):
+        return self.updated_at
+
+    def set_id(self, id):
+        self.id = id
+
+    def set_created_at(self):
+        self.created_at = datetime.now()
+
+    def set_updated_at(self):
+        self.updated_at = datetime.now()
+
     def __str__(self):
-        return f"AnonymousUser(username={self.username}, id={self.id})"
+        return f"AnonymousUser(username={self.username}, id={self.id}, created_at={self.created_at}, updated_at={self.updated_at})"
 
 class AuthenticatedUser(User):
     def __init__(self, username, id, email):
@@ -67,11 +98,23 @@ class AuthenticatedUser(User):
     def set_username(self, username):
         self.username = username
 
-    def set_id(self, id):
-        self.id = id
-    
     def get_type(self):
         return self.type
 
+    def get_created_at(self):
+        return self.created_at
+    
+    def get_updated_at(self):
+        return self.updated_at
+
+    def set_id(self, id):
+        self.id = id
+
+    def set_created_at(self):
+        self.created_at = datetime.now()
+
+    def set_updated_at(self):
+        self.updated_at = datetime.now()
+    
     def __str__(self):
         return f"AuthenticatedUser(username={self.username}, id={self.id}, email={self.email})"

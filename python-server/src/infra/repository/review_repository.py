@@ -1,16 +1,16 @@
 import sys
 sys.path.append('../')
 
-from models.user import User
+from models.review import Review
 from infra.database.database_connection import DatabaseConnection
 
-class UserRepository:
+class ReviewRepository:
     def __init__(self):
         self.db = DatabaseConnection().connect()
-        self.collection = self.db["users"] 
+        self.collection = self.db["reviews"] 
 
-    def save(self, user: User):
-        self.collection.insert_one(user.__dict__)
+    def save(self, review: Review):
+        self.collection.insert_one(review.__dict__)
 
     def delete(self, id):
         self.collection.delete_one({"id": id})
@@ -20,4 +20,6 @@ class UserRepository:
         if document:
             document["_id"] = str(document["_id"])
         return document
-
+    
+    def update(self, review):
+        self.collection.update_one({"id": review.get_id()}, {"$set": review.__dict__})
