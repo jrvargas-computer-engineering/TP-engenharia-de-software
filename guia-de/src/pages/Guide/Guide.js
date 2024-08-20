@@ -2,7 +2,6 @@
 import React, { useState, useEffect } from 'react';
 import './Guide.css';
 import Section from '../../components/Section/Section';
-import TitleForm from '../../components/TitleForm/TitleForm';
 
 
 function transformGuideSections(guideData) {

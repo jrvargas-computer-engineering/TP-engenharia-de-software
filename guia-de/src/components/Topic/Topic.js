@@ -1,7 +1,7 @@
 // src/pages/Topic.js
 import React, { useEffect, useState } from 'react';
 import './Topic.css';
-import  Opinion from '../../components/Opinion/Opinion';
+import Opinion from '../../components/Opinion/Opinion';
 import OpinionForm from '../../components/OpinionForm/OpinionForm';
 import TitleForm from '../../components/TitleForm/TitleForm';
 
@@ -30,7 +30,6 @@ export function Topic({title, opinions, childTopics, hierarchy, topicId}) {
       }, []);
 
     const titleSize = hierarchy === 0 ? 'large-title' : 'medium-title';
-    const imgSize = hierarchy === 0 ? 'parent-icon' : 'child-icon';
     const buttonNewTopic = hierarchy === 0 ? true : false;
 
     return (
