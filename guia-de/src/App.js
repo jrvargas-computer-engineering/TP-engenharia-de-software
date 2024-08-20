@@ -18,6 +18,13 @@ function App() {
   const [search, setSearch] = useState("");
   const [performSearch, setPerformSearch] = useState(false);
 
+    fetch('http://localhost:3001/requests', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+    .then( => response.json())
 
   return (
     <div className="App">
