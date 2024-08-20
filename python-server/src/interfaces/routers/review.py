@@ -2,6 +2,7 @@ import sys
 sys.path.append('../../')
 
 from fastapi import APIRouter, HTTPException
+from typing import Optional
 from pydantic import BaseModel
 from usecases import create_review_usecase, update_review_usecase
 from infra.repository.review_repository import ReviewRepository
@@ -14,7 +15,8 @@ class ReviewIdInput(BaseModel):
 class CreateReviewInput(BaseModel):
     id: str
     content: str
-    rating: int
+    owner: str
+    service_provider: Optional[str] = None
 
 @review_router.post("/create")
 async def create_review(input: CreateReviewInput): 
@@ -23,7 +25,7 @@ async def create_review(input: CreateReviewInput):
         return {"status": "ok"}
     except Exception as e:
         print(f"Error: {e}")
-        raise HTTPException(status_code=500, detail="Erro ao salvar a resenha")
+        raise HTTPException(status_code=500, detail="Erro ao salvar a review")
     
 @review_router.get("/")
 async def get_reviews(input: ReviewIdInput):
@@ -39,7 +41,7 @@ async def delete_review(input: ReviewIdInput):
         return {"status": "ok"}
     except Exception as e:
         print(f"Error: {e}")
-        raise HTTPException(status_code=500, detail="Erro ao deletar a resenha")
+        raise HTTPException(status_code=500, detail="Erro ao deletar a review")
     
 @review_router.post("/update")
 async def update_review(input: CreateReviewInput):
@@ -48,4 +50,4 @@ async def update_review(input: CreateReviewInput):
         return {"status": "ok"}
     except Exception as e:
         print(f"Error: {e}")
-        raise HTTPException(status_code=500, detail="Erro ao atualizar a resenha")
+        raise HTTPException(status_code=500, detail="Erro ao atualizar a review")
