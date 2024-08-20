@@ -1,8 +1,9 @@
 // src/pages/Topic.js
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Topic.css';
 import  Opinion from '../../components/Opinion/Opinion';
 import OpinionForm from '../../components/OpinionForm/OpinionForm';
+import TitleForm from '../../components/TitleForm/TitleForm';
 
 
 
@@ -16,7 +17,13 @@ const addGoogleFontLink = () => {
 
 export function Topic({title, opinions, childTopics, hierarchy, topicId}) {  
     
-    console.log("topic id dentro do topic", topicId);
+
+    const [isVisible, setIsVisible] = useState(false); 
+
+    const toggleVisibility = () => {
+        setIsVisible(!isVisible); 
+      };
+
 
     useEffect(() => {
         addGoogleFontLink();
@@ -24,22 +31,46 @@ export function Topic({title, opinions, childTopics, hierarchy, topicId}) {
 
     const titleSize = hierarchy === 0 ? 'large-title' : 'medium-title';
     const imgSize = hierarchy === 0 ? 'parent-icon' : 'child-icon';
+    const buttonNewTopic = hierarchy === 0 ? true : false;
 
     return (
     <div className="topic-container"> 
         <div className="header-topic">
-            <span className={`material-symbols-outlined ${imgSize}`}  >add_circle</span>
-            <h1 className={titleSize}>{title}</h1>
+            <h1 className={titleSize} >{title}</h1>
+                {buttonNewTopic && !isVisible && (
+                  <>
+                    <div className='new-topic-button-container ' id = "container-button-subtopic">
+                        <button
+                            type="button"
+                            onClick={toggleVisibility}
+                        >
+                            <span className={`material-symbols-outlined`} id="icon-new-topic">add_circle</span>
+                            <span className="small-text" id="button-new-topic-text">Subtópico</span>
+                        </button>
+                    </div>
+                </>
+                )}
+
         </div>
+
         <div className="content-topic-container">
             <div className="grid-opinions-container">
+                {isVisible && (
+                    <>
+                        <div className="title-form-container">
+                            <div className="title-form-box">
+                                <TitleForm onClick={toggleVisibility} isNestedInSection={false} parentId={topicId}/>
+                            </div>
+                        </div>
+                    </>
+                )}
                 {opinions && opinions.length > 0 && opinions.map((opinion, index) => (
                     <Opinion key={index} title={opinion.title} user={opinion.user} content={opinion.content} />
                 ))}
-            </div>
-            <div className='form-space'>
-                <div className='form-box'>
-                    <OpinionForm topicId = {topicId}/>
+                <div className='form-space'>
+                    <div className='form-box'>
+                        <OpinionForm topicId = {topicId}/>
+                    </div>
                 </div>
             </div>
             <div className='child-topics-container'>

@@ -5,10 +5,52 @@
 
 .header-container{
     /*background-color: darkcyan;*/
-    display: flex;
-    align-items: center;
     
 }
+
+.new-topic-button-container{
+    display: flex;
+    /*background-color: orangered;*/
+    align-items: flex-start;
+    margin-left: 5px;
+}
+
+.new-topic-button-container button{
+    background-color: var(--main-color);
+    display: flex;
+    align-items: center;
+    color: var(--tertiary-color);
+    border: 1px solid;
+    border-color: var(--tertiary-color);
+    border-radius: 15px;
+    cursor: pointer;
+
+    
+}
+.new-topic-button-container button:hover{
+    border-color: var(--secundary-color);
+    background-color: var(--secundary-color) ;
+    
+}
+
+#icon-new-topic {
+    font-size: 15px;
+    font-weight:normal;
+    color: var(--tertiary-color);
+}
+
+
+#button-new-topic-text{
+    font-size: 12px;
+    margin-left: 4px;
+}
+
+.title-form-container{
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
 .content-container{
     justify-content: center;  
     display: flex;            
