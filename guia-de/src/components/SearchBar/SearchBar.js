@@ -12,7 +12,7 @@ const addGoogleFontLink = () => {
 
 
 
-export function SearchBar() {
+function SearchBar() {
 
   useEffect(() => {
     addGoogleFontLink();
@@ -28,3 +28,4 @@ export function SearchBar() {
   );
 }
 
+export default SearchBar;

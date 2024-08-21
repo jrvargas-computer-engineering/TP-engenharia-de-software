@@ -1,6 +1,6 @@
 import './styles/App.css';
 import React from 'react';
-import Home  from './pages/Home/Home.js';
+import Home  from './pages/Home/Home';
 import Guide from './pages/Guide/Guide'
 import Search from './pages/Search/Search'
 import AddGuide from './pages/AddGuide/AddGuide'

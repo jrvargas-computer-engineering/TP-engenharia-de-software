@@ -1,6 +1,6 @@
 import React from 'react';
 
-export function SearchButton(props) {
+function SearchButton(props) {
   return (
     <button 
           className='App-button' 

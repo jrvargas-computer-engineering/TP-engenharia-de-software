@@ -2,7 +2,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-export function MenuTest() {
+function MenuTest() {
   return (
     <div>
       <h1>Página de Testes</h1>
