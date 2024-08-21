@@ -29,5 +29,18 @@ class ReviewRepository:
             reviews.append(document)
         return reviews
     
+    def search(self, query):
+        regex_query = {"$regex": query, "$options": "i"}  # Case-insensitive search
+        documents = self.collection.find({
+            "name": regex_query
+        })
+        
+        results = []
+        for document in documents:
+            document["_id"] = str(document["_id"])
+            results.append(document)
+        
+        return results
+    
     def update(self, review):
         self.collection.update_one({"id": review.get_id()}, {"$set": review.__dict__})
