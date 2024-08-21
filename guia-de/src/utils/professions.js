@@ -1,4 +1,4 @@
-export const professions = [
+const professions = [
   "Engenheiros",
   "Médicos",
   "Professores",
@@ -20,3 +20,5 @@ export const professions = [
   "Geólogos",
   "Meteorologistas"
 ];
+
+export default professions;
