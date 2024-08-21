@@ -2,7 +2,6 @@
 import React, { useState, useEffect } from 'react';
 import './Guide.css';
 import Section from '../../components/Section/Section';
-import TitleForm from '../../components/TitleForm/TitleForm';
 
 
 function transformGuideSections(guideData) {
@@ -53,6 +52,12 @@ function transformGuideSections(guideData) {
 
 
 export function Guide({ guideData }) {
+
+    /*precisa ter um guia
+      com todos os seus tópicos 
+      e todas as suas seções 
+      e todos os seus reviews
+    */
 
     const [sections, setSections] = useState([]);
 
