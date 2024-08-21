@@ -1,3 +1,6 @@
+import sys
+sys.path.append('../../')
+
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 from usecases import create_topic_usecase
@@ -9,10 +12,12 @@ class CreateTopicInput(BaseModel):
     id: str
     title: str
     hierarchy: int
-    children_topics: list
+    children_topics: bool
+    reviews: list       
 
 @topic_router.post("/create")
 async def create_topic(input: CreateTopicInput):
+    print(f"create topic: {input}") 
     try:
         create_topic_usecase.exec(input)
         return {"status": "ok"}
@@ -24,6 +29,7 @@ async def create_topic(input: CreateTopicInput):
 async def get_topics(input: str):
     try:
         topic_repository = TopicRepository()
+  
         topic = topic_repository.get(input)
         return topic
     except Exception as e:

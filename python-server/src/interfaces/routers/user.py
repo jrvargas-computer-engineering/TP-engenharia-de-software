@@ -75,13 +75,9 @@ async def login_with_google(token: GoogleToken):
             "is_authenticated": True,
             "token": token.token 
         }
-
-        print(f"User info: {user_info}")    
-        
         user_repository = UserRepository()
         existing_user = user_repository.get(user_info["id"])
-        print(f"entrou no login_with")
-        print(user_info)    
+
         if existing_user is None:
             
             create_user_usecase.exec(user_info)

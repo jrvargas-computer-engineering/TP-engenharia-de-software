@@ -1,17 +1,40 @@
+
 .conteiner{
-    width: 95vw;
-    height: 95vh;
+    position: fixed;
+    z-index: 1000;
+    width: 40vw;
+    height: 100vh;
     display: flex;
+    margin-right: auto; /* Empurra o contêiner para a direita */
+
     align-items: center;
     justify-content: center;
+    background-color: var(--color-cards);
+
 }
 
-.title{
+.welcome{
   font-family: 'Roboto Flex', sans-serif;
   font-size: 18px;
   color: var(--text-main-color);
-  margin-bottom: -0,8px;
 }
+
+.name{
+  margin-top: -15px;
+  margin-bottom: -15px;
+  font-family: 'Roboto Flex', sans-serif;
+  font-size: 30px;
+  font-weight: 600;
+  color: var(--text-main-color);
+}
+
+.email{
+  font-family: 'Roboto Flex', sans-serif;
+  font-size: 22px;
+  color: var(--text-main-color);
+  margin-bottom: -1px;
+}
+
 
 .myaccount {
     text-align: center;     

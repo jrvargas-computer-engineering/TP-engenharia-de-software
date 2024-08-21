@@ -55,8 +55,8 @@ function MyAccount() {
                 <header className="myaccount">
                     {isAuthenticated ? (
                         <div>
-                            <p className="title">Bem-Vindo<br></br></p><p className="medium-stylized-title">{userInfo.username}!</p>
-                            <p className="small-text">Email: {userInfo.email}</p>
+                            <p className="welcome">Bem-Vindo<br></br></p><p className="name">{userInfo.username}!</p>
+                            <p className="email">Email: {userInfo.email}</p>
                             <button onClick={handleLogout} className="button">Sair agora</button>
                         </div>
                     ) : (

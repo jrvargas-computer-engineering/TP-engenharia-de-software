@@ -41,6 +41,8 @@
 }
 
 .App-side-bar{
+  position: fixed;
+  z-index: 2000;
   display: flex;
   flex-direction: column;
   align-items: end;
@@ -55,7 +57,13 @@
 }
 
 
-
+.button-login{
+  background-color: transparent;
+  border: none; /* Remove as bordas */
+  padding: 0; /* Remove o padding */
+  margin: 0; /* Remove o margin */
+  cursor: pointer;
+}
 .App-link {
   color: #61dafb;
 }

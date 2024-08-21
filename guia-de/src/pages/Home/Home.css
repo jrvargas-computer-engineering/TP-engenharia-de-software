@@ -4,6 +4,10 @@
     height: 100vh;
 }
 
+.pop-up{
+    margin-top: 0px;
+    width: 100%;
+}
 main{
     margin-top: 40px;
 }
@@ -12,6 +16,7 @@ header{
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    padding-top: 100px;
 }
 
 .header-top{

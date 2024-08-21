@@ -26,7 +26,11 @@ function MenuTest() {
             <Link to="/AddGuide">
                 AddGuide
             </Link>
-
+        </li>
+        <li>
+            <Link to="/TesteGuide">
+                TestGuide
+            </Link>
         </li>
       </ul>
     </div>

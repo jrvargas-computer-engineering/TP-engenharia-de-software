@@ -1,10 +1,14 @@
 @import '../../styles/colors.css';  
 
 .container-new-guide{
+    position: fixed;
     display: flex;
     width:100vw;
     height: 100vh;
+    background-color: rgba(33, 42, 52, 0.8);
+    z-index: 1000;
 }
+
 
 .main-new-guide{
     display: flex; 
@@ -16,7 +20,10 @@
     background-color: var(--color-cards);
 }
 
-
+#icon-close{
+    color:var(--secundary-color);
+    padding: 10px;
+}
 .left-side{
     display: flex;
     flex-direction: column;

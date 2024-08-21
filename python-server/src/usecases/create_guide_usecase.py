@@ -14,12 +14,8 @@ def exec(input):
         id=input.id,
         name=input.name,
         location=location.__dict__,
-        type=input.type,
         description=input.description,
-        owner=input.owner,
-        sections=input.sections,
-        visibility=input.visibility,
-        anonymous_allowed=input.anonymous_allowed,
+        sections=input.sections
     )
     guide_repository = GuideRepository()
     guide_repository.save(guide)

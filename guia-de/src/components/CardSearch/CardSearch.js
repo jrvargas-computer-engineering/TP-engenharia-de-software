@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-
+import Guide from "../../pages/Guide/Guide"
 import './CardSearch.css';
 
 const addGoogleFontLink = () => {
@@ -17,9 +17,11 @@ function CardSearch({ num, title, local, abstract }) {
         addGoogleFontLink();
     }, []);
 
+    const data = require('../../data/guides.json');
+    console.log(data);
+
     return (
       <div className="card-container">
-        <Link to='/Guide'>
             <div className="card-box">
                 <div className="card-header">
                     <div className="card-num-box">
@@ -38,7 +40,6 @@ function CardSearch({ num, title, local, abstract }) {
                     <p className={"small-text"}>{abstract}</p>
                 </div>
             </div>
-        </Link>
       </div>
     );
 }

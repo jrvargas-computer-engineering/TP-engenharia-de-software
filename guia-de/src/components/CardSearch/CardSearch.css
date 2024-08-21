@@ -6,6 +6,11 @@
     border-radius: 20px;
 }
 
+#link-search{
+    text-decoration: none;
+    color: inherit; 
+
+}
 .card-box {
     margin: 40px;
 }
@@ -58,6 +63,8 @@
 }
 #icon-pin{
     font-size: 15px;
+    color:var(--text-main-color);
+
 }
 
 .card-content{

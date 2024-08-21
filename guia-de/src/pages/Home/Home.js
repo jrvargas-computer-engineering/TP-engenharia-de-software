@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import NewGuide from '../../components/NewGuide/NewGuide';
+
 import './Home.css';
 
 import SearchBar from '../../components/SearchBar/SearchBar';
@@ -6,6 +8,7 @@ import SideIcon from '../../components/SideIcon';
 import AnimatedText from '../../components/AnimatedText';
 import professions from '../../utils/professions';
 import CardsList from '../../components/CardsList/CardsList';
+import MyAccount from '../MyAccount/MyAccount';
 
 async function getAllGuides() {
     try {
@@ -48,6 +51,9 @@ async function searchGuides(query) {
 }
 
 function Home(props) {
+
+
+
     const [cards, setCards] = useState([]);
     const [search, setSearch] = useState("");
     const [performSearch, setPerformSearch] = useState(false);
@@ -91,9 +97,30 @@ function Home(props) {
         }
     }, [loadTrends, performSearch]);
 
+    const [isVisible, setIsVisible] = useState(false);
+    
+    const toggleOverlay = () => {
+        setIsVisible(!isVisible);
+        console.log("toggle");    
+    };
+
+    const [isVisibleLogin, setIsVisibleLogin] = useState(false);
+    
+    const toggleOverlayLogin = () => {
+        setIsVisibleLogin(!isVisibleLogin);
+        console.log("toggle");    
+    };
     return (
         <>
-            <SideIcon />
+
+            {isVisible && (
+                <NewGuide class="pop-up" toggleFunction={toggleOverlay}/>
+            )}
+            <SideIcon toggleFunction={toggleOverlayLogin}/>
+            {isVisibleLogin && (
+                <MyAccount/>
+            )}
+
             <div className="main-home">
                 <header>
                     <div className="header-top">
@@ -117,7 +144,7 @@ function Home(props) {
                     <div className="">
                         <div className="home-cards-container">
                             <div className="home-cards-box">
-                                <CardsList cards={cards} />
+                                <CardsList cards={cards} toggleFunction={toggleOverlay}/>
                             </div>
                         </div>
                     </div>

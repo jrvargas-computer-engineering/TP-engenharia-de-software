@@ -18,6 +18,7 @@ class CreateSectionInput(BaseModel):
 
 @section_router.post("/create")
 async def create_section(input: CreateSectionInput): 
+    print(f"entrou no create_section")      
     try:
         create_section_usecase.exec(input)
         return {"status": "ok"}
@@ -26,7 +27,7 @@ async def create_section(input: CreateSectionInput):
         raise HTTPException(status_code=500, detail="Erro ao salvar a seção")
     
 @section_router.get("/")
-async def get_sections(input: str):
+async def get_sections(input: str):  
     section_repository = SectionRepository()
     section = section_repository.get(input) 
     return section

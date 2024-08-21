@@ -3,185 +3,138 @@ import React, { useState, useEffect } from 'react';
 import './Guide.css';
 import Section from '../../components/Section/Section';
 
-
-function transformGuideSections(guideData) {
-    return guideData.GuideSections.map(section => {
-        return {
-            id: section.id,
-            title: section.title,
-            topics: section.topics.map(topic => {
-                const opinions = topic.opinions?.map(opinion => ({
-                    title: opinion.title,
-                    user: opinion.user,
-                    content: opinion.content
-                })) || [];
-
-                let hierarchy = -1; 
-                let topicId = -1; 
-                let childTopics = [];
-                hierarchy = topic.hierarchy;
-                topicId = topic.id
-
-                if (topic.childTopics) {
-                    childTopics = section.topics
-                        .filter(child => child.parentId === topic.id)
-                        .map(child => ({
-                            ...child,
-                            opinions: child.opinions?.map(opinion => ({
-                                title: opinion.title,
-                                user: opinion.user,
-                                content: opinion.content
-                            })) || [],
-                            childTopics: [],
-                            hierarchy: child.hierarchy,
-                            topicId: child.id
-                        }));
-                }
-                return {
-                  ...topic,
-                  opinions: opinions,
-                  childTopics: childTopics,
-                  id: topicId,
-                  hierarchy: hierarchy,
-                };
-            })
-        };
-    });
-}
-
 async function getTopic(id) {
-
     try {
         const response = await fetch(`http://localhost:4000/topic/?input=${id}`, {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-        },
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
         });
 
         if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+            throw new Error(`HTTP error! status: ${response.status}`);
         }
 
         const data = await response.json();
         return data;
     } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error('Error fetching topic data:', error);
     }
 }
 
 async function getSection(id) {
-    
     try {
         const response = await fetch(`http://localhost:4000/section/?input=${id}`, {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-        },
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
         });
 
         if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+            throw new Error(`HTTP error! status: ${response.status}`);
         }
 
         const data = await response.json();
         return data;
     } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error('Error fetching section data:', error);
     }
 }
 
 async function getGuide(id) {
     try {
         const response = await fetch(`http://localhost:4000/guide/?input=${id}`, {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-        },
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
         });
 
         if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+            throw new Error(`HTTP error! status: ${response.status}`);
         }
 
         const data = await response.json();
         return data;
+    } catch (error) {
+        console.error('Error fetching guide data:', error);
     }
-    catch (error) {
-        console.error('Error fetching data:', error);
-    }   
 }
 
-export function Guide(props) {
-
-    /*precisa ter um guia
-      com todos os seus tópicos 
-      e todas as suas seções 
-      e todos os seus reviews
-    */
-
+export function Guide() {
+    const [guide, setGuide] = useState(null);
     const [sections, setSections] = useState([]);
     const [topics, setTopics] = useState([]);
-
-    const guideId = "3a091c40-9f32-421f-a38c-d6b4ed5ddd44";
-    let guide = getGuide(guideId);
-
-
-    if (guide && guide.sections) {
-        for (const sectionId of guide.sections) {
-            let section = getSection(sectionId);
-            sections.push(section);
-    
-            if (section && section.topics) {
-                for (const topicId of section.topics) {
-                    let topic = getTopic(topicId);
-                    topics.push(topic);
-                }
-            }
-        }
-    }
-    
-
-    //const [sections, setSections] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        console.log("Sections: ", sections);
-        console.log("Topics: ", topics);
-    //    if (guideData) {
-    //        const transformedSections = transformGuideSections(guideData);
-    //       setSections(transformedSections);
-    //    }
-    }, [sections, topics]);
+        async function fetchData() {
+            const guideId = "d3396e79-9591-4408-8a49-226cc35043e9";
 
+            // 1. Fetch Guide
+            const guideData = await getGuide(guideId);
+            console.log(guideData.sections);
+            if (guideData) {
+                setGuide({
+                    id: guideData.id,
+                    name: guideData.name,
+                    location: guideData.location || 'UNKNOWN',
+                    description: guideData.description,
+                    sections: guideData.sections || [],
+                });
+
+                // 2. Fetch Sections
+                const sectionsData = await Promise.all(
+                    guideData.sections.map(sectionId => getSection(sectionId))
+                );
+
+                console.log(sectionsData);
+
+                setSections(sectionsData);
+
+                // 3. Fetch Topics for each Section
+                const allTopics = await Promise.all(
+                    sectionsData.flatMap(section => 
+                        section.topics.map(topicId => getTopic(topicId))
+                    )
+                );
+
+                setTopics(allTopics);
+            }
+            setLoading(false);
+        }
+
+        fetchData();
+    }, []);
+
+    if (loading) {
+        return <div>Loading...</div>;
+    }
 
     return (
         <div className='guide-container'>
             <div className="main-container">
-                <div className="search-container">
-                </div>
-
                 <div className="title-container"> 
-                    <h1 className="main-title">{guideData.guideName}</h1>
+                    <h1 className="main-title">{guide?.name}</h1>
                 </div>
 
                 <div className='content-container'>
                     <div className="grid-container">
-                        {sections && sections.length > 0 && sections.map((section, index) => (
+                        {sections.map((section, index) => (
                             <Section
                                 key={index}
                                 title={section.title}
                                 sectionId={section.id}
-                                topics={section.topics.filter(topic => topic.hierarchy === 0)} // Filtra para renderizar apenas tópicos principais
-                          />
+                                topics={topics.filter(topic => topic.sectionId === section.id && topic.hierarchy === 0)}
+                            />
                         ))}
-
                     </div>
                 </div>
-
             </div>
         </div>
     );
-
 }
 
 export default Guide;

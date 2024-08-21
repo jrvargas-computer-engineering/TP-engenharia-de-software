@@ -1,7 +1,34 @@
 // src/components/TitleForm.js
 import React, { useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import './TitleForm.css';
  
+
+
+async function postTopic(topicData) {
+    const url = 'http://localhost:4000/topic/create';
+    
+    try {
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(topicData)
+        });
+
+        if (!response.ok) {
+            throw new Error('Erro na requisição: ' + response.statusText);
+        }
+
+        const data = await response.json();
+        console.log('Resposta do servidor:', data);
+    } catch (error) {
+        console.error('Erro ao fazer o POST:', error);
+    }
+}
+      
+
 
 function TitleForm({onClick, isNestedInSection, id, parentId, sectionParent, guideParent}) {
 
@@ -12,27 +39,24 @@ function TitleForm({onClick, isNestedInSection, id, parentId, sectionParent, gui
     
         if (isNestedInSection) {
             jsonResult = {
-                id: id,
+                id: uuidv4(),
                 title: titleTopic,
-                childTopics: false,
                 hierarchy: 0,
-                parentId: null,
-                sectionParent: sectionParent,
-                opinions: []
+                children_topics: false,
+                reviews: []
             };
         } else {
             console.log("ta num topico");
             jsonResult = {
-                id: id,
+                id: uuidv4(),
                 title: titleTopic,
-                childTopics: false,
                 hierarchy: 1,
-                parentId: parentId,
-                sectionParent: null,
-                opinions: []
+                children_topics: false,
+                reviews: []
           };
         }
     
+        postTopic(jsonResult);
         console.log(JSON.stringify(jsonResult, null, 2));
       };
 

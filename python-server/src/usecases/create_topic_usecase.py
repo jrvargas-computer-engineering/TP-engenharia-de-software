@@ -9,6 +9,7 @@ def exec(input):
         title=input.title,
         hierarchy=input.hierarchy,
         children_topics=input.children_topics,
+        reviews=input.reviews
     )
     topic_repository = TopicRepository()
     topic_repository.save(topic)

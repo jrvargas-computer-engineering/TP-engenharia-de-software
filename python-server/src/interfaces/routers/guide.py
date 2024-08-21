@@ -17,12 +17,8 @@ class CreateGuideInput(BaseModel):
     id: str
     name: str
     location: Location
-    type: str
     description: str
-    owner: str
     sections: list
-    visibility: str
-    anonymous_allowed: bool
 
 class SearchQuery(BaseModel):
     query: str  
@@ -31,7 +27,7 @@ class GuideIdInput(BaseModel):
     id: str
 
 @guide_router.post("/create")
-async def create_guide(input: CreateGuideInput):   
+async def create_guide(input: CreateGuideInput): 
     try:
         create_guide_usecase.exec(input)
         return {"status": "ok"}
