@@ -4,7 +4,7 @@ import { SideIcon } from '../../components/SideIcon';
 import { AnimatedText } from '../../components/AnimatedText';
 import { professions } from '../../utils/professions';
 
-export function AddGuide() {
+function AddGuide() {
     return (
         <>
         <SideIcon/>

@@ -4,8 +4,8 @@ import './OpinionForm.css';
 // src/components/TitleForm.js
 
 async function postReviewData(reviewData) {
-    const url = 'https://6qd4q9qt-4000.brs.devtunnels.ms/review/create';
-
+    const url = 'http://localhost:4000/review/create';
+    
     try {
         const response = await fetch(url, {
             method: 'POST',
@@ -26,29 +26,29 @@ async function postReviewData(reviewData) {
     }
 }
 
-async function getReviewData() {
-    const url = 'https://6qd4q9qt-4000.brs.devtunnels.ms/review';
+
+       
+async function getReviewData(id) {
+
     try {
-        const response = await fetch(url, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
-            }
+        const response = await fetch(`http://localhost:4000/review/?id=${id}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        },
         });
 
         if (!response.ok) {
-            throw new Error('Erro na requisição: ' + response.statusText);
+        throw new Error(`HTTP error! status: ${response.status}`);
         }
 
         const data = await response.json();
-        console.log('Dados recebidos do servidor:', data);
+        console.log(data);
         return data;
     } catch (error) {
-        console.error('Erro ao fazer o GET:', error);
+        console.error('Error fetching data:', error);
     }
 }
-
-
 
 function OpinionForm(topicId) {    
 
@@ -68,16 +68,14 @@ function OpinionForm(topicId) {
 
         setIsVisible(!isVisible); 
 
-        const reviewId =`${uuidv4()}`
-
         const reviewData = {
             title: title,
             content: content,
-            id: reviewId
+            id: `${uuidv4()}`
         };
 
         postReviewData(reviewData);
-        const review = getReviewData(reviewId);
+        const review = getReviewData(reviewData.id);
 
         console.log("ReviewData: ", review);
         

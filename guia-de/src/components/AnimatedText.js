@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-export const AnimatedText = ({ list, delay }) => {
+const AnimatedText = ({ list, delay }) => {
   const [currentText, setCurrentText] = useState('');
   const [currentIndex, setCurrentIndex] = useState(0);
   const [showAnimation, setAnimation] = useState(false);
@@ -29,3 +29,6 @@ export const AnimatedText = ({ list, delay }) => {
 
   return <span className={showAnimation?'App-anim-span':"" }>{currentText}</span>;
 };
+
+
+export default AnimatedText;
