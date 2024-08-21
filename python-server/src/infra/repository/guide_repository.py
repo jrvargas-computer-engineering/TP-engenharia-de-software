@@ -21,6 +21,14 @@ class GuideRepository:
             document["_id"] = str(document["_id"])
         return document
     
+    def get_all(self):
+        documents = self.collection.find()
+        guides = []
+        for document in documents:
+            document["_id"] = str(document["_id"])
+            guides.append(document)
+        return guides
+    
     def search(self, query):
         regex_query = {"$regex": query, "$options": "i"}  # Case-insensitive search
         documents = self.collection.find({

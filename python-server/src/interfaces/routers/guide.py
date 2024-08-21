@@ -27,7 +27,6 @@ class CreateGuideInput(BaseModel):
 class SearchQuery(BaseModel):
     query: str  
 
-
 class GuideIdInput(BaseModel):
     id: str
 
@@ -43,7 +42,7 @@ async def create_guide(input: CreateGuideInput):
 @guide_router.get("/")
 async def get_guides(input: GuideIdInput):
     guide_repository = GuideRepository()
-    guide = guide_repository.get_guide(input.id) 
+    guide = guide_repository.get(input.id) 
     return guide
 
 @guide_router.post("/delete")
@@ -61,5 +60,12 @@ async def search_review(input: SearchQuery):
     guide_repository = GuideRepository()
     guides = guide_repository.search(input.query) 
     return guides  
+
+@guide_router.get("/all")
+async def get_all_reviews():
+    guide_repository = GuideRepository()
+    reviews = guide_repository.get_all() 
+    return reviews
+
     
     

@@ -20,14 +20,6 @@ class ReviewRepository:
         if document:
             document["_id"] = str(document["_id"])
         return document
-    
-    def get_all(self):
-        documents = self.collection.find()
-        reviews = []
-        for document in documents:
-            document["_id"] = str(document["_id"])
-            reviews.append(document)
-        return reviews
 
     
     def update(self, review):
