@@ -1,0 +1,27 @@
+@import '../../styles/colors.css';  
+
+
+.searchbar-container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 40px;
+  border: solid 1px var(--secundary-color);
+  border-radius: 100px;
+  color: var(--text-color);
+}
+
+.search-box {
+    display: flex;
+    width: 95%;
+    border: none;
+    outline: none;
+    background-color: var(--main-color);
+    padding: 0;
+  }
+
+
+  #search-icon {
+    color: var(--secundary-color);
+    padding-left:15px;
+  }
