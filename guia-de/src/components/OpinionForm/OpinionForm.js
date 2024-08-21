@@ -25,8 +25,6 @@ async function postReviewData(reviewData) {
         console.error('Erro ao fazer o POST:', error);
     }
 }
-
-
        
 async function getReviewData(id) {
 
@@ -95,8 +93,6 @@ function OpinionForm(topicId) {
               };
               
     const updatedJson = addReviewToJson(jsonData, topicId, reviewData);
-
-
 
     // Converte o JSON atualizado para uma string
     const jsonString = JSON.stringify(updatedJson, null, 2);

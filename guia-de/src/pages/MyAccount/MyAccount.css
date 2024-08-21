@@ -1,0 +1,35 @@
+.conteiner{
+    width: 95vw;
+    height: 95vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.title{
+  font-family: 'Roboto Flex', sans-serif;
+  font-size: 18px;
+  color: var(--text-main-color);
+  margin-bottom: -0,8px;
+}
+
+.myaccount {
+    text-align: center;     
+}
+
+.button{
+    background-color: transparent;
+    color: white;
+    border: 1px solid #FF493B;
+    border-radius: 15px;
+    padding: 08px;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-top: 10px;
+  }
+
+  .button:hover {
+    background-color: #FF493B;
+    color: white; 
+    transform: scale(1.05); 
+}

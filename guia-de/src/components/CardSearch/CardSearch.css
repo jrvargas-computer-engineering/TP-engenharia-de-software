@@ -49,6 +49,7 @@
 
 #icon-voice{
     font-size: 22px;
+    color:var(--text-main-color);
 }
 
 .localization-box {

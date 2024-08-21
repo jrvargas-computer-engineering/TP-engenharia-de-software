@@ -26,9 +26,9 @@ async def create_section(input: CreateSectionInput):
         raise HTTPException(status_code=500, detail="Erro ao salvar a seção")
     
 @section_router.get("/")
-async def get_sections(input: SectionIdInput):
+async def get_sections(input: str):
     section_repository = SectionRepository()
-    section = section_repository.get(input.id) 
+    section = section_repository.get(input) 
     return section
 
 @section_router.post("/delete")

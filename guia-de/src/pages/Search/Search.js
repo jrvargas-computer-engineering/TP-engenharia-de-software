@@ -4,7 +4,7 @@ import CardsList from '../../components/CardsList/CardsList';
 
 
 
-export function Search() {
+function Search() {
 
     const text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent eget sagittis turpis. Vestibulum bibendum ultricies erat at dictum. Morbi luctus mollis nisi vel pellentesque. Integer vitae rutrum quam, vitae pulvinar felis. Cras feugiat, erat nec iaculis convallis, purus tellus mollis sapien, a congue lectus massa ac elit. In fermentum tellus est, ut vulputate arcu rutrum a. Pellentesque scelerisque lacus nec convallis pellentesque. Nam et interdum tellus. Morbi ultricies arcu odio, eu ultrices nulla iaculis vitae. Vivamus semper cursus nisi vel condimentum. Sed sem ipsum, pretium sit amet iaculis in, ornare id nibh. Duis sit amet viverra nulla.";
 

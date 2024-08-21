@@ -22,6 +22,12 @@ function MenuTest() {
                 Search
             </Link>
         </li>
+        <li>
+            <Link to="/AddGuide">
+                AddGuide
+            </Link>
+
+        </li>
       </ul>
     </div>
   );

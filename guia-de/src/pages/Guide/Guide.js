@@ -49,9 +49,70 @@ function transformGuideSections(guideData) {
     });
 }
 
+async function getTopic(id) {
 
+    try {
+        const response = await fetch(`http://localhost:4000/topic/?input=${id}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        });
 
-export function Guide({ guideData }) {
+        if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Error fetching data:', error);
+    }
+}
+
+async function getSection(id) {
+    
+    try {
+        const response = await fetch(`http://localhost:4000/section/?input=${id}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        });
+
+        if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Error fetching data:', error);
+    }
+}
+
+async function getGuide(id) {
+    try {
+        const response = await fetch(`http://localhost:4000/guide/?input=${id}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        });
+
+        if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        return data;
+    }
+    catch (error) {
+        console.error('Error fetching data:', error);
+    }   
+}
+
+export function Guide(props) {
 
     /*precisa ter um guia
       com todos os seus tópicos 
@@ -60,13 +121,37 @@ export function Guide({ guideData }) {
     */
 
     const [sections, setSections] = useState([]);
+    const [topics, setTopics] = useState([]);
+
+    const guideId = "3a091c40-9f32-421f-a38c-d6b4ed5ddd44";
+    let guide = getGuide(guideId);
+
+
+    if (guide && guide.sections) {
+        for (const sectionId of guide.sections) {
+            let section = getSection(sectionId);
+            sections.push(section);
+    
+            if (section && section.topics) {
+                for (const topicId of section.topics) {
+                    let topic = getTopic(topicId);
+                    topics.push(topic);
+                }
+            }
+        }
+    }
+    
+
+    //const [sections, setSections] = useState([]);
 
     useEffect(() => {
-        if (guideData) {
-            const transformedSections = transformGuideSections(guideData);
-            setSections(transformedSections);
-        }
-    }, [guideData]);
+        console.log("Sections: ", sections);
+        console.log("Topics: ", topics);
+    //    if (guideData) {
+    //        const transformedSections = transformGuideSections(guideData);
+    //       setSections(transformedSections);
+    //    }
+    }, [sections, topics]);
 
 
     return (
@@ -89,6 +174,7 @@ export function Guide({ guideData }) {
                                 topics={section.topics.filter(topic => topic.hierarchy === 0)} // Filtra para renderizar apenas tópicos principais
                           />
                         ))}
+
                     </div>
                 </div>
 

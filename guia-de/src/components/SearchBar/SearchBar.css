@@ -8,7 +8,7 @@
   height: 40px;
   border: solid 1px var(--secundary-color);
   border-radius: 100px;
-  color: var(--text-color);
+  color: var(--text-main-color);
 }
 
 .search-box {

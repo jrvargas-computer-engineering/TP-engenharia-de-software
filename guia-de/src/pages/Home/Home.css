@@ -1,6 +1,7 @@
 
-.body-home{
-    width: 100%;
+.main-home{
+    width: 100vw;
+    height: 100vh;
 }
 
 main{
@@ -14,7 +15,6 @@ header{
 }
 
 .header-top{
-
     display: flex;
     width: 80%;
     margin-left: 20%;

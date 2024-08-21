@@ -17,7 +17,8 @@ class UserRepository:
 
     def get(self, id):
         document = self.collection.find_one({"id": id})
-        if document:
-            document["_id"] = str(document["_id"])
+        if not document:
+            return None
+        document["_id"] = str(document["_id"])
         return document
 

@@ -7,7 +7,7 @@ from fastapi.security import OAuth2PasswordBearer
 from google.oauth2 import id_token
 from google.auth.transport import requests
 
-from usecases import create_user_usecase, update_user_usecase
+from usecases import create_user_usecase
 from infra.repository.user_repository import UserRepository
 from settings.settings import GOOGLE_CLIENT_ID  
 
@@ -62,12 +62,31 @@ async def update_user(input: CreateUserInput):
     
 @user_router.post("/login")
 async def login_with_google(token: GoogleToken):
+
     try:
         idinfo = id_token.verify_oauth2_token(token.token, requests.Request(), GOOGLE_CLIENT_ID)
-        print(idinfo)
         if idinfo['iss'] not in ['accounts.google.com', 'https://accounts.google.com']:
-            raise HTTPException(status_code=401, detail="Usuário não autorizado")
-        return {"status": "ok", "user": idinfo}
+            raise HTTPException(status_code=401, detail="Usuário não autorizado")  
+
+        user_info = {
+            "id": idinfo["sub"],
+            "username": idinfo["name"],
+            "email": idinfo["email"],
+            "is_authenticated": True,
+            "token": token.token 
+        }
+
+        print(f"User info: {user_info}")    
+        
+        user_repository = UserRepository()
+        existing_user = user_repository.get(user_info["id"])
+        print(f"entrou no login_with")
+        print(user_info)    
+        if existing_user is None:
+            
+            create_user_usecase.exec(user_info)
+        
+        return {"status": "ok", "user": user_info}
     except Exception as e:
         print(f"Error: {e}")
         raise HTTPException(status_code=401, detail="Token inválido")

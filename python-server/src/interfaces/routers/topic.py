@@ -11,9 +11,6 @@ class CreateTopicInput(BaseModel):
     hierarchy: int
     children_topics: list
 
-class IdTopicInput(BaseModel):
-    id: str
-
 @topic_router.post("/create")
 async def create_topic(input: CreateTopicInput):
     try:
@@ -24,17 +21,17 @@ async def create_topic(input: CreateTopicInput):
         raise HTTPException(status_code=500, detail="Erro ao criar o tópico")
 
 @topic_router.get("/")
-async def get_topics(input: IdTopicInput):
+async def get_topics(input: str):
     try:
         topic_repository = TopicRepository()
-        topic = topic_repository.get(input.id)
+        topic = topic_repository.get(input)
         return topic
     except Exception as e:
         print(f"Error: {e}")
         raise HTTPException(status_code=500, detail="Erro ao obter os tópicos")
     
 @topic_router.post("/delete")
-async def delete_topic(input: IdTopicInput):
+async def delete_topic(input):
     try:
         topic_repository = TopicRepository()
         topic_repository.delete(input.id)

@@ -84,9 +84,11 @@ class AnonymousUser(User):
         return f"AnonymousUser(username={self.username}, id={self.id}, created_at={self.created_at}, updated_at={self.updated_at})"
 
 class AuthenticatedUser(User):
-    def __init__(self, username, id, email):
+    def __init__(self, username, id, email, token, is_authenticated):
         super().__init__(username, id)
         self.email = email
+        self.token = token
+        self.is_authenticated = is_authenticated
         self.type = self.__class__.__name__
     
     def get_username(self):
@@ -101,6 +103,12 @@ class AuthenticatedUser(User):
     def get_type(self):
         return self.type
 
+    def get_email(self):
+        return self.email   
+    
+    def get_token(self):    
+        return self.token   
+
     def get_created_at(self):
         return self.created_at
     
@@ -110,6 +118,9 @@ class AuthenticatedUser(User):
     def set_id(self, id):
         self.id = id
 
+    def set_token(self, token):
+        self.token = token
+
     def set_created_at(self):
         self.created_at = datetime.now()
 
@@ -117,4 +128,4 @@ class AuthenticatedUser(User):
         self.updated_at = datetime.now()
     
     def __str__(self):
-        return f"AuthenticatedUser(username={self.username}, id={self.id}, email={self.email})"
+        return f"AuthenticatedUser(username={self.username}, id={self.id}, email={self.email}, token={self.token}, is_authenticated={self.is_authenticated})"

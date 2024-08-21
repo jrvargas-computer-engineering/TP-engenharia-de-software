@@ -12,7 +12,7 @@ const addGoogleFontLink = () => {
 
 
 
-function SearchBar() {
+function SearchBar(props) {
 
   useEffect(() => {
     addGoogleFontLink();
@@ -22,7 +22,12 @@ function SearchBar() {
     <>
       <div className='searchbar-container'>
         <span className={`material-symbols-outlined`} id="search-icon">search</span>
-        <input className='search-box medium-text' placeholder='Pesquisar' />
+        <input className='search-box medium-text' 
+              placeholder={props.placeholder} 
+              onChange={(e) => props.handleChange(e.target.value)} 
+              onKeyDown={(e) => {
+                if(e.key === "Enter"){
+                props.handleEnterPress(true)}}} />
       </div>
     </>
   );

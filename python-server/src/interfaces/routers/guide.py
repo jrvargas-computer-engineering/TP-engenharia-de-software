@@ -40,9 +40,10 @@ async def create_guide(input: CreateGuideInput):
         raise HTTPException(status_code=500, detail="Erro ao salvar o guia")
     
 @guide_router.get("/")
-async def get_guides(input: GuideIdInput):
+async def get_guides(input: str):
+  
     guide_repository = GuideRepository()
-    guide = guide_repository.get(input.id) 
+    guide = guide_repository.get(input) 
     return guide
 
 @guide_router.post("/delete")
@@ -56,9 +57,13 @@ async def delete_guide(input: GuideIdInput):
         raise HTTPException(status_code=500, detail="Erro ao deletar o guia")
     
 @guide_router.get("/search")
-async def search_review(input: SearchQuery):
+async def search_review(input):
     guide_repository = GuideRepository()
-    guides = guide_repository.search(input.query) 
+    guides = guide_repository.search(input) 
+    for guide in guides:
+        if '_id' in guide:
+            guide.pop('_id')
+ 
     return guides  
 
 @guide_router.get("/all")
