@@ -21,5 +21,13 @@ class ReviewRepository:
             document["_id"] = str(document["_id"])
         return document
     
+    def get_all(self):
+        documents = self.collection.find()
+        reviews = []
+        for document in documents:
+            document["_id"] = str(document["_id"])
+            reviews.append(document)
+        return reviews
+    
     def update(self, review):
         self.collection.update_one({"id": review.get_id()}, {"$set": review.__dict__})

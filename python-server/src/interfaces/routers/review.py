@@ -34,7 +34,11 @@ async def get_review(id: str):
     review = review_repository.get(id) 
     return review
 
-
+@review_router.get("/all")
+async def get_all_reviews():
+    review_repository = ReviewRepository()
+    reviews = review_repository.get_all() 
+    return reviews
 
 @review_router.post("/delete")
 async def delete_review(input: ReviewIdInput):
