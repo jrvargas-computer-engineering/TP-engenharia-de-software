@@ -27,7 +27,7 @@ const AnimatedText = ({ list, delay }) => {
     }
   }, [currentIndex, showAnimation, delay, list]);
 
-  return <span className={showAnimation?'App-anim-span':""}>{currentText}</span>;
+  return <span className={showAnimation?'App-anim-span':"" }>{currentText}</span>;
 };
 
 

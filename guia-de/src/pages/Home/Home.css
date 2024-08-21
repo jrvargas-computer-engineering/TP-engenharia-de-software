@@ -1,0 +1,35 @@
+
+.body-home{
+    width: 100%;
+}
+
+main{
+    margin-top: 40px;
+}
+header{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.header-top{
+
+    display: flex;
+    width: 80%;
+    margin-left: 20%;
+}
+.header-content{
+    width: 60%;
+}
+
+.home-cards-container{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+
+}
+
+.home-cards-box {
+    width: 60%;
+}
