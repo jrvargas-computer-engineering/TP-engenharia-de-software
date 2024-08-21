@@ -17,8 +17,7 @@ function CardSearch({ num, title, local, abstract }) {
         addGoogleFontLink();
     }, []);
 
-    const data = require('../../data/guides.json');
-    console.log(data);
+
 
     return (
       <div className="card-container">
