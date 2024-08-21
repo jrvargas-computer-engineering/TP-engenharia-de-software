@@ -24,6 +24,10 @@ class CreateGuideInput(BaseModel):
     visibility: str
     anonymous_allowed: bool
 
+class SearchQuery(BaseModel):
+    query: str  
+
+
 class GuideIdInput(BaseModel):
     id: str
 
@@ -51,5 +55,11 @@ async def delete_guide(input: GuideIdInput):
     except Exception as e:
         print(f"Error: {e}")
         raise HTTPException(status_code=500, detail="Erro ao deletar o guia")
+    
+@guide_router.get("/search")
+async def search_review(input: SearchQuery):
+    guide_repository = GuideRepository()
+    guides = guide_repository.search(input.query) 
+    return guides  
     
     

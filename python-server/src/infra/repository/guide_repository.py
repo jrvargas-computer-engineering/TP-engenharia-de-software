@@ -20,3 +20,16 @@ class GuideRepository:
         if document:
             document["_id"] = str(document["_id"])
         return document
+    
+    def search(self, query):
+        regex_query = {"$regex": query, "$options": "i"}  # Case-insensitive search
+        documents = self.collection.find({
+            "name": regex_query
+        })
+        
+        results = []
+        for document in documents:
+            document["id"] = str(document["id"])
+            results.append(document)
+        
+        return results

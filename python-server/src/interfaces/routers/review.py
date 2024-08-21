@@ -17,8 +17,6 @@ class CreateReviewInput(BaseModel):
     content: str
     title: str
 
-class SearchQuery(BaseModel):
-    query: str  
 
 @review_router.post("/create")
 async def create_review(input: CreateReviewInput): 
@@ -62,8 +60,3 @@ async def update_review(input: CreateReviewInput):
         print(f"Error: {e}")
         raise HTTPException(status_code=500, detail="Erro ao atualizar a review")
     
-@review_router.get("/search")
-async def search_review(input: SearchQuery):
-    review_repository = ReviewRepository()
-    reviews = review_repository.search(input.query) 
-    return reviews  
