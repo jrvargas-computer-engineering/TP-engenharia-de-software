@@ -53,6 +53,12 @@ function transformGuideSections(guideData) {
 
 export function Guide({ guideData }) {
 
+    /*precisa ter um guia
+      com todos os seus tópicos 
+      e todas as suas seções 
+      e todos os seus reviews
+    */
+
     const [sections, setSections] = useState([]);
 
     useEffect(() => {
