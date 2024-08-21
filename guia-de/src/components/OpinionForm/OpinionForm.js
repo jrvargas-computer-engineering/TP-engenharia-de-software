@@ -4,7 +4,7 @@ import './OpinionForm.css';
 // src/components/TitleForm.js
 
 async function postReviewData(reviewData) {
-    const url = 'https://6qd4q9qt-4000.brs.devtunnels.ms/review/create';
+    const url = 'http://localhost:4000/review/create';
     
     try {
         const response = await fetch(url, {
@@ -26,25 +26,27 @@ async function postReviewData(reviewData) {
     }
 }
 
-async function getReviewData(reviewId) {
-    console.log("ReviewId: ", reviewId);
+
+       
+async function getReviewData(id) {
+
     try {
-        const response = await fetch(`https://6qd4q9qt-4000.brs.devtunnels.ms/review?id=${reviewId}`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            redirect: 'follow'
+        const response = await fetch(`http://localhost:4000/review/?id=${id}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        },
         });
 
         if (!response.ok) {
-            throw new Error('Network response was not ok');
+        throw new Error(`HTTP error! status: ${response.status}`);
         }
 
         const data = await response.json();
+        console.log(data);
         return data;
     } catch (error) {
-        console.error('Erro ao fazer o GET:', error);
+        console.error('Error fetching data:', error);
     }
 }
 

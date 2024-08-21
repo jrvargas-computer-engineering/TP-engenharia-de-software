@@ -27,12 +27,11 @@ async def create_review(input: CreateReviewInput):
         raise HTTPException(status_code=500, detail="Erro ao salvar a review")
     
 @review_router.get("/")
-async def get_review(review_id: str = Query(None, alias="id")):
-    print(f"review_id: {review_id}")
+async def get_review(id: str):
+    print(f"entrou no get_review")
+    print(id)
     review_repository = ReviewRepository()
-    review = review_repository.get(review_id)
-    if review is None:
-        raise HTTPException(status_code=404, detail="Review not found")
+    review = review_repository.get(id) 
     return review
 
 
