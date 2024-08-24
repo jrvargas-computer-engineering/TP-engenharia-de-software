@@ -28,11 +28,11 @@ async def create_review(input: CreateReviewInput):
         raise HTTPException(status_code=500, detail="Erro ao salvar a review")
     
 @review_router.get("/")
-async def get_review(id: str):
+async def get_review(input: str):
     print(f"entrou no get_review")
-    print(id)
+    print(input)
     review_repository = ReviewRepository()
-    review = review_repository.get(id) 
+    review = review_repository.get(input) 
     return review
 
 @review_router.post("/delete")
