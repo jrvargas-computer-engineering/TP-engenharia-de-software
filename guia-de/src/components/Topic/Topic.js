@@ -30,6 +30,8 @@ export function Topic({title, opinions, childTopics, hierarchy, topicId}) {
     const titleSize = hierarchy === 0 ? 'large-title' : 'medium-title';
     const buttonNewTopic = hierarchy === 0 ? true : false;
 
+    console.log("opinions", opinions);
+
     return (
     <div className="topic-container"> 
         <div className="header-topic">
@@ -62,7 +64,7 @@ export function Topic({title, opinions, childTopics, hierarchy, topicId}) {
                     </>
                 )}
                 {opinions && opinions.length > 0 && opinions.map((opinion, index) => (
-                    <Opinion key={index} title={opinion.title} user={opinion.user} content={opinion.content} />
+                    <Opinion key={index} title={opinion.title} user={opinion.owner} content={opinion.content} />
                 ))}
                 <div className='form-space'>
                     <div className='form-box'>

@@ -6,7 +6,7 @@ import  TitleForm from '../../components/TitleForm/TitleForm';
 
 
 //onClick, isNestedInSection, id, parentId, sectionParent, guideParent
-function Section({title, topics, sectionId}) {
+function Section({title, topics, sectionId, reviews}) {
 
     const [isVisible, setIsVisible] = useState(false); 
 
@@ -47,7 +47,7 @@ function Section({title, topics, sectionId}) {
             <div className="content-container">
                 <div className="grid-container">
                     {topics && topics.length > 0 && topics.map((topic, index) => (
-                        <Topic key={index} title={topic.title} opinions={topic.opinions} childTopics={topic.childTopics} hierarchy={topic.hierarchy} topicId={topic.id}/>
+                        <Topic key={index} title={topic.title} opinions={reviews} childTopics={topic.childTopics} hierarchy={topic.hierarchy} topicId={topic.id}/>
                     ))}
                 </div>
             </div>

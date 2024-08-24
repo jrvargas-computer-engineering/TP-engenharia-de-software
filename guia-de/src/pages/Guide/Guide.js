@@ -161,8 +161,8 @@ export function Guide() {
                                 key={index}
                                 title={section.title}
                                 sectionId={section.id}
-                                topics={topics.filter(topic => topic.sectionId === section.id && topic.hierarchy === 0)}
-                                reviews={reviews.filter(review => review.sectionId === section.id)}
+                                topics={topics}
+                                reviews={reviews}
                             />
                         ))}
                     </div>
