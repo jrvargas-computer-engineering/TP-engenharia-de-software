@@ -7,7 +7,7 @@ def exec(input):
     location = Location(
             city=input.location.city,
             state=input.location.state,
-            country=input.location.country
+            country=input.location.country,
     )
 
     guide = Guide(
@@ -15,7 +15,8 @@ def exec(input):
         name=input.name,
         location=location.__dict__,
         description=input.description,
-        sections=input.sections
+        sections=input.sections,
+        owner=input.user_id 
     )
     guide_repository = GuideRepository()
     guide_repository.save(guide)

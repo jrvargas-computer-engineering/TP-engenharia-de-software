@@ -19,6 +19,7 @@ class CreateGuideInput(BaseModel):
     location: Location
     description: str
     sections: list
+    user_id: str
 
 class SearchQuery(BaseModel):
     query: str  

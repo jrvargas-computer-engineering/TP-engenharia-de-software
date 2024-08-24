@@ -1,12 +1,13 @@
 from datetime import datetime
 
 class Guide:
-    def __init__(self, id, name, location, description, sections):  
+    def __init__(self, id, name, location, description, sections, owner):  
         self.id = id
         self.name = name
         self.location = location
         self.description = description
         self.sections = sections
+        self.owner = owner  
         self.created_at = datetime.now()
         self.updated_at = datetime.now()
 
@@ -20,6 +21,8 @@ class Guide:
     def get_location(self):
         return self.location
 
+    def get_owner(self):
+        return self.owner
 
     def get_description(self):
         return self.description
@@ -30,6 +33,9 @@ class Guide:
     # Setters
     def set_id(self, id):
         self.id = id
+
+    def set_owner(self, owner):
+        self.owner = owner  
 
     def set_name(self, name):
         self.name = name

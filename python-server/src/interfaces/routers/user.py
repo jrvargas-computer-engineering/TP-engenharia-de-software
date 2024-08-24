@@ -61,10 +61,9 @@ async def login_with_google(token: GoogleToken):
             "token": token.token 
         }
         user_repository = UserRepository()
-        existing_user = user_repository.get(user_info["id"])
+        existing_user = user_repository.get_one(user_info["id"])
 
         if existing_user is None:
-            
             create_user_usecase.exec(user_info)
         
         return {"status": "ok", "user": user_info}

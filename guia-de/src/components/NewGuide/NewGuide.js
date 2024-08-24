@@ -1,17 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 import './NewGuide.css';
-import professions from '../../utils/professions';
-import AnimatedText from '../../components/AnimatedText';
-
 
 const addGoogleFontLink = () => {
     const link = document.createElement('link');
     link.href = "https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200";
     link.rel = "stylesheet";
     document.head.appendChild(link);
-  };
+};
 
 async function postGuide(guideData) {
     const url = 'http://localhost:4000/guide/create';
@@ -58,22 +54,27 @@ async function postSection(sectionData) {
         console.error('Erro ao fazer o POST:', error);
     }
 }
-  
 
-function NewGuide({toggleFunction}) {
+function NewGuide({ toggleFunction }) {
 
     useEffect(() => {
         addGoogleFontLink();
-      }, []);
+    }, []);
    
-      
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [location, setLocation] = useState('');
     const [first, setFirst] = useState('');
 
-  
     const handleSubmit = () => {
+        // Obter o ID do usuário do localStorage (que foi salvo após o login)
+        const storedUserInfo = JSON.parse(localStorage.getItem('userInfo'));
+        let userId = storedUserInfo?.id;
+
+        if (!userId) {
+            userId = "Anonymous";
+        }
+
         // Criando o objeto com os dados coletados
         const guideData = {
             id: uuidv4(),
@@ -84,10 +85,10 @@ function NewGuide({toggleFunction}) {
                 state: '',  
                 country: '' 
             },
-            sections:[
+            sections: [
                 uuidv4(),
             ],
-
+            user_id: userId // Incluindo o ID do usuário
         };
 
         const sectionData = {
@@ -96,16 +97,12 @@ function NewGuide({toggleFunction}) {
             topics: []
         }; 
 
-        /*id, title, topics*/
-        console.log(guideData)
-        console.log(sectionData)
+        console.log(guideData);
+        console.log(sectionData);
 
         postGuide(guideData);
         postSection(sectionData);
-
     };
-
-/*description, name, location*/
 
     return (
         <div className="container-new-guide">
@@ -182,6 +179,6 @@ function NewGuide({toggleFunction}) {
             </div>
         </div> 
     );
-  }
-  
-  export default NewGuide;
+}
+
+export default NewGuide;

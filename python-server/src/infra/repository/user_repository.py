@@ -15,6 +15,12 @@ class UserRepository:
     def delete(self, id):
         self.collection.delete_one({"id": id})
 
+    def get_one(self, id):
+        document = self.collection.find_one({"id": id})
+        if document:
+            document["_id"] = str(document["_id"])
+        return document 
+
     def get(self, ids):
         # Busca todos os documentos cujos ids estão na lista fornecida
         documents = self.collection.find({"id": {"$in": ids}})
