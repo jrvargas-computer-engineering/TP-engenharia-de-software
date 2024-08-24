@@ -72,10 +72,13 @@ function OpinionForm(topicId) {
             id: `${uuidv4()}`
         };
 
+        console.log("ReviewData: ", reviewData);
+
         postReviewData(reviewData);
         const review = getReviewData(reviewData.id);
 
-        console.log("ReviewData: ", review);
+        console.log("review: ", review);
+        
         
         const addReviewToJson = (jsonData, topicId, reviewData) => {
           console.log("topic id antes do push: ", topicId.topicId)

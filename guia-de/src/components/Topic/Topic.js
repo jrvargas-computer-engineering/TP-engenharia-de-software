@@ -11,8 +11,31 @@ const addGoogleFontLink = () => {
     document.head.appendChild(link);
 };
 
+async function getUsers(ids) {
+    const queryString = ids.join(',');
+    const url = `http://localhost:4000/user/?input=${queryString}`; 
+    try {       
+        const response = await fetch(url, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        return data;
+    }
+    catch (error) {
+        console.error('Error fetching data:', error);
+    }
+}
+
 export function Topic({ title, opinions, childTopics, hierarchy, topicId }) {
     const [isVisible, setIsVisible] = useState(false);
+    const [users, setUsers] = useState({});
+    const [loading, setLoading] = useState(true);
 
     const toggleVisibility = () => {
         setIsVisible(!isVisible);
@@ -22,10 +45,27 @@ export function Topic({ title, opinions, childTopics, hierarchy, topicId }) {
         addGoogleFontLink();
     }, []);
 
+    useEffect(() => {
+        const fetchUsers = async () => {
+            const userIds = opinions.map(opinion => opinion.owner);
+            const uniqueUserIds = [...new Set(userIds)]; // Remove duplicados
+            const usersData = await getUsers(uniqueUserIds);
+            const usersMap = {};
+            usersData.forEach(user => {
+                usersMap[user.id] = user;
+            });
+            setUsers(usersMap);
+            setLoading(false);
+        };
+        fetchUsers();
+    }, [opinions]);
+
     const titleSize = hierarchy === 0 ? 'large-title' : 'medium-title';
     const buttonNewTopic = hierarchy === 0 ? true : false;
 
-    console.log("opinions", opinions);
+    if (loading) {
+        return <div>Loading...</div>;
+    }
 
     return (
         <div className="topic-container">
@@ -58,9 +98,9 @@ export function Topic({ title, opinions, childTopics, hierarchy, topicId }) {
                         </>
                     )}
                     {opinions && opinions.length > 0 && opinions.map((opinion, index) => {
-                        const opinionData = opinion[0]; // Acessa o objeto aninhado
+                        const user = users[opinion.owner];
                         return (
-                            <Opinion key={index} title={opinionData.title} user={opinionData.owner} content={opinionData.content} />
+                            <Opinion key={index} title={opinion.title} user={user ? user.username : 'Anonymous User'} content={opinion.content} />
                         );
                     })}
                     <div className='form-space'>

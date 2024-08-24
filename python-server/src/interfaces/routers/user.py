@@ -1,7 +1,7 @@
 import sys
 sys.path.append('../../')
 
-from fastapi import APIRouter, HTTPException, Depends
+from fastapi import APIRouter, HTTPException, Query
 from pydantic import BaseModel
 from fastapi.security import OAuth2PasswordBearer
 from google.oauth2 import id_token
@@ -13,9 +13,6 @@ from settings.settings import GOOGLE_CLIENT_ID
 
 user_router = APIRouter()
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
-
-class UserIdInput(BaseModel):
-    id: str
 
 class CreateUserInput(BaseModel):
     id: str
@@ -36,29 +33,17 @@ async def create_user(input: CreateUserInput):
         raise HTTPException(status_code=500, detail="Erro ao salvar o usuário")
     
 @user_router.get("/")
-async def get_users(input: UserIdInput):
-    user_repository = UserRepository()
-    user = user_repository.get(input.id) 
-    return user
-
-@user_router.post("/delete")
-async def delete_user(input: UserIdInput):
+async def get_users(input: str = Query(...)): 
     try:
+        # Split the comma-separated string into a list of strings
+        input_list = input.split(',')
+        
         user_repository = UserRepository()
-        user_repository.delete(input.id) 
-        return {"status": "ok"}
+        users = user_repository.get(input_list)
+        return users
     except Exception as e:
         print(f"Error: {e}")
-        raise HTTPException(status_code=500, detail="Erro ao deletar o usuário")
-    
-@user_router.post("/update")
-async def update_user(input: CreateUserInput):
-    try:
-        update_user_usecase.exec(input)
-        return {"status": "ok"}
-    except Exception as e:
-        print(f"Error: {e}")
-        raise HTTPException(status_code=500, detail="Erro ao atualizar o usuário")
+        raise HTTPException(status_code=500, detail="Error retrieving users")
     
 @user_router.post("/login")
 async def login_with_google(token: GoogleToken):

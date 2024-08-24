@@ -2,23 +2,24 @@ import React, { useState, useEffect } from 'react';
 import './Guide.css';
 import Section from '../../components/Section/Section';
 
-async function getReview(id, sectionId) {
+async function getReviews(ids) {
     try {
-        const response = await fetch(`http://localhost:4000/review/?input=${id}`, {
+        const queryString = ids.join(',');
+        const response = await fetch(`http://localhost:4000/review/?input=${queryString}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
             },
         });
 
-        if (!response.ok) { 
+        if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
-        }   
+        }
 
-        const data = await response.json(); 
-        return { ...data, sectionId }; // Adiciona sectionId ao review
+        const data = await response.json();
+        return data;
     } catch (error) {
-        console.error('Error fetching review data:', error);
+        console.error('Error fetching topic data:', error);
     }
 }
 
@@ -116,7 +117,7 @@ export function Guide() {
 
             // 4. Collect all reviews from all topics
             const allReviewIds = topicsData.flatMap(topic => topic.reviews || []);
-            const reviewsData = await Promise.all(allReviewIds.map(reviewId => getReview(reviewId)));
+            const reviewsData = await getReviews(allReviewIds);
 
             // 5. Set state with all collected data
             setGuide(guideData);
