@@ -15,12 +15,17 @@ class ReviewRepository:
     def delete(self, id):
         self.collection.delete_one({"id": id})
 
-    def get(self, id):
-        document = self.collection.find_one({"id": id})
-        if document:
+    def get(self, ids):
+        # Busca todos os documentos cujos ids estão na lista fornecida
+        documents = self.collection.find({"id": {"$in": ids}})
+        
+        # Converte o campo _id de cada documento para string
+        result = []
+        for document in documents:
             document["_id"] = str(document["_id"])
-        return document
-
+            result.append(document)
+        
+        return result
     
     def update(self, review):
         self.collection.update_one({"id": review.get_id()}, {"$set": review.__dict__})

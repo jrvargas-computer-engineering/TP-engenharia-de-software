@@ -6,7 +6,7 @@ import  TitleForm from '../../components/TitleForm/TitleForm';
 
 
 //onClick, isNestedInSection, id, parentId, sectionParent, guideParent
-function Section({title, topics, sectionId, reviews}) {
+function Section({title, topics, sectionId, reviews}) { 
 
     const [isVisible, setIsVisible] = useState(false); 
 

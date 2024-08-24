@@ -22,12 +22,17 @@ class SectionRepository:
         }
         self.collection.insert_one(simple_section)
 
-    def get(self, id):
-        document = self.collection.find_one({"id": id})
-        if not document:
-            return None
-        document["_id"] = str(document["_id"])
-        return document
+    def get(self, ids):
+        # Busca todos os documentos cujos ids estão na lista fornecida
+        documents = self.collection.find({"id": {"$in": ids}})
+        
+        # Converte o campo _id de cada documento para string
+        result = []
+        for document in documents:
+            document["_id"] = str(document["_id"])
+            result.append(document)
+        
+        return result
 
     def delete(self, id):
         self.collection.delete_one({"id": id})

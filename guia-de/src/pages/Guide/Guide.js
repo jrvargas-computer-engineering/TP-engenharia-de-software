@@ -22,9 +22,10 @@ async function getReview(id, sectionId) {
     }
 }
 
-async function getTopic(id) {
+async function getTopics(ids) {
     try {
-        const response = await fetch(`http://localhost:4000/topic/?input=${id}`, {
+        const queryString = ids.join(',');
+        const response = await fetch(`http://localhost:4000/topic/?input=${queryString}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -42,9 +43,10 @@ async function getTopic(id) {
     }
 }
 
-async function getSection(id) {
+async function getSections(ids) {
     try {
-        const response = await fetch(`http://localhost:4000/section/?input=${id}`, {
+        const queryString = ids.join(',');
+        const response = await fetch(`http://localhost:4000/section/?input=${queryString}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -61,6 +63,7 @@ async function getSection(id) {
         console.error('Error fetching section data:', error);
     }
 }
+
 
 async function getGuide(id) {
     try {
@@ -83,64 +86,49 @@ async function getGuide(id) {
 }
 
 export function Guide() {
-    const [guide, setGuide] = useState(null);
+    const [guide, setGuide] = useState([]);
     const [sections, setSections] = useState([]);
     const [topics, setTopics] = useState([]);
     const [reviews, setReviews] = useState([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        async function fetchData() {
-            const guideId = "das1";
-
-            // 1. Fetch Guide
+        async function fetchData(guideId) {     
+            // 1. Fetch Guides
             const guideData = await getGuide(guideId);
-            console.log(guideData.sections);
-            if (guideData) {
-                setGuide({
-                    id: guideData.id,
-                    name: guideData.name,
-                    location: guideData.location || 'UNKNOWN',
-                    description: guideData.description,
-                    sections: guideData.sections || [],
-                });
-
-                console.log("guideData", guideData);
-
-                // 2. Fetch Sections
-                const sectionsData = await Promise.all(
-                    guideData.sections.map(sectionId => getSection(sectionId))
-                );
-
-                console.log("sectionsData", sectionsData);
-
-                setSections(sectionsData);
-
-                // 3. Fetch Topics for each Section
-                const topicsData = await Promise.all(
-                    sectionsData.flatMap(section => 
-                        section.topics.map(topicId => getTopic(topicId))
-                    )
-                );
-
-                console.log("topicsData", topicsData);
-                setTopics(topicsData);
-
-                // 4. Fetch Reviews for each Topic
-                const reviewsData = await Promise.all(
-                    topicsData.flatMap(topic => 
-                        Array.isArray(topic.reviews) ? topic.reviews.map(reviewId => getReview(reviewId, topic.sectionId)) : []
-                    )
-                );
-
-                console.log("reviewsData", reviewsData);
-                setReviews(reviewsData);
-
+            
+            if (!guideData) {
                 setLoading(false);
+                return null;
             }
+
+            if (!guideData.sections) {
+                setLoading(false);
+                return null;
+            }
+            // 2. Collect all sections from one guide
+            const allSectionsIds = guideData.sections;
+            const sectionsData = await getSections(allSectionsIds);
+
+            // 3. Collect all topic IDs from all sections
+            const allTopicIds = sectionsData.flatMap(section => section.topics || []);
+            const topicsData = await getTopics(allTopicIds);
+
+            // 4. Collect all reviews from all topics
+            const allReviewIds = topicsData.flatMap(topic => topic.reviews || []);
+            const reviewsData = await Promise.all(allReviewIds.map(reviewId => getReview(reviewId)));
+
+            // 5. Set state with all collected data
+            setGuide(guideData);
+            setSections(sectionsData);
+            setTopics(topicsData);
+            setReviews(reviewsData);
+            setLoading(false);
         }
 
-        fetchData();
+        // Example usage with a list of guide IDs
+        const guideId = "das1";   
+        fetchData(guideId);
     }, []);
 
     if (loading) {
@@ -151,7 +139,7 @@ export function Guide() {
         <div className='guide-container'>
             <div className="main-container">
                 <div className="title-container"> 
-                    <h1 className="main-title">{guide?.name}</h1>
+                    <h1 className="main-title">{guide[0]?.name}</h1>
                 </div>
 
                 <div className='content-container'>

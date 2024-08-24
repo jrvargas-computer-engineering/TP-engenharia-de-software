@@ -1,7 +1,8 @@
 import sys
 sys.path.append('../../')
 
-from fastapi import APIRouter, HTTPException
+import json
+from fastapi import APIRouter, HTTPException, Query
 from pydantic import BaseModel
 from usecases import create_section_usecase, update_section_usecase
 from infra.repository.section_repository import SectionRepository
@@ -25,12 +26,22 @@ async def create_section(input: CreateSectionInput):
     except Exception as e:
         print(f"Error: {e}")
         raise HTTPException(status_code=500, detail="Erro ao salvar a seção")
-    
+
+section_router = APIRouter()
+
 @section_router.get("/")
-async def get_sections(input: str):  
-    section_repository = SectionRepository()
-    section = section_repository.get(input) 
-    return section
+async def get_sections(input: str = Query(...)):
+    try:
+        # Split the comma-separated string into a list of strings
+        input_list = input.split(',')
+        
+        section_repository = SectionRepository()
+        sections = section_repository.get(input_list)
+        return sections
+    except Exception as e:
+        print(f"Error: {e}")
+        raise HTTPException(status_code=500, detail="Error retrieving sections")
+
 
 @section_router.post("/delete")
 async def delete_section(input: SectionIdInput):
