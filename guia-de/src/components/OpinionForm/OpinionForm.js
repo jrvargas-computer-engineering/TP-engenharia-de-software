@@ -99,7 +99,7 @@ function OpinionForm({ topicId }) {
             title: title,
             content: content,
             id: `${uuidv4()}`,
-            owner: userId
+            owner: userId ? userId : "Anonymous"
         };
 
         postReviewData(reviewData);
