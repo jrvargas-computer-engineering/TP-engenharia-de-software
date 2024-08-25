@@ -33,6 +33,7 @@ async function getUsers(ids) {
 }
 
 export function Topic({ title, opinions, childTopics, hierarchy, topicId }) {
+
     const [isVisible, setIsVisible] = useState(false);
     const [users, setUsers] = useState({});
     const [loading, setLoading] = useState(true);
@@ -96,8 +97,8 @@ export function Topic({ title, opinions, childTopics, hierarchy, topicId }) {
                         </>
                     )}
                     {opinions && opinions.length > 0 && opinions.map((opinion, index) => {
-                        const user = users[opinion.owner];
-                        console.log("Users: ", users);
+                        const user = users.find(user => user.id === opinion.owner);
+    
                         return (
                             <Opinion 
                                 key={index} 

@@ -135,7 +135,7 @@ export function Guide() {
     if (loading) {
         return <div>Loading...</div>;
     }
-
+    
     return (
         <div className='guide-container'>
             <div className="main-container">

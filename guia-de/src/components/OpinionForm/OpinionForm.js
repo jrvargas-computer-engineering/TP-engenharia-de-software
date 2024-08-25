@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import './OpinionForm.css';
-// src/components/TitleForm.js
 
 async function postReviewData(reviewData) {
     const url = 'http://localhost:4000/review/create';
@@ -74,62 +73,56 @@ async function getReviewData(id) {
     }
 }
 
-function OpinionForm(topicId) {    
-
-
+function OpinionForm({ topicId }) {    
     const jsonData = require('../../data/guides.json');
 
     // Estados para armazenar o conteúdo dos campos
     const [isVisible, setIsVisible] = useState(false); 
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
+    const [userId, setUserId] = useState(null);
+
+    useEffect(() => {
+        const storedUserInfo = JSON.parse(localStorage.getItem('userInfo'));
+        if (storedUserInfo) {
+            setUserId(storedUserInfo.id);
+        }
+    }, []);
 
     const toggleVisibility = () => {
       setIsVisible(!isVisible); 
     };
 
     const handleSubmit = () => {
-
         setIsVisible(!isVisible); 
-
         const reviewData = {
             title: title,
             content: content,
-            id: `${uuidv4()}`
+            id: `${uuidv4()}`,
+            owner: userId
         };
 
-        console.log("ReviewData: ", reviewData);
-
         postReviewData(reviewData);
-        console.log("topicId: ", topicId);
-        console.log("reviewData.id: ", reviewData.id);    
-        addReviewToTopic({topic_id: topicId.topicId, review_id: reviewData.id});        
-        //const review = getReviewData(reviewData.id);
-        //console.log("review: ", review);
-        
+        addReviewToTopic({ topic_id: topicId, review_id: reviewData.id });        
         
         const addReviewToJson = (jsonData, topicId, reviewData) => {
-          console.log("topic id antes do push: ", topicId.topicId)
-          for (const section of jsonData.GuideSections) {
-              for (const topic of section.topics) {
-                  if (topic.id === topicId.topicId) {
-                      topic.opinions.push(reviewData);
-                      return jsonData;
+            for (const section of jsonData.GuideSections) {
+                for (const topic of section.topics) {
+                    if (topic.id === topicId) {
+                        topic.opinions.push(reviewData);
+                        return jsonData;
                     }
-                  }
                 }
-                
-                console.error("Topic com topicId " + topicId + " não encontrado.");
-                return jsonData;
-              };
+            }
+            console.error("Topic com topicId " + topicId + " não encontrado.");
+            return jsonData;
+        };
               
-    const updatedJson = addReviewToJson(jsonData, topicId, reviewData);
+        const updatedJson = addReviewToJson(jsonData, topicId, reviewData);
 
-    // Converte o JSON atualizado para uma string
-    const jsonString = JSON.stringify(updatedJson, null, 2);
-    console.log(jsonString);
-    
-  };
+        // Converte o JSON atualizado para uma string
+        const jsonString = JSON.stringify(updatedJson, null, 2);
+    };
     
     return (
         <div className="form-opinion-container">            
