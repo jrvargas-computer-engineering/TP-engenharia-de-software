@@ -72,7 +72,6 @@ function TitleForm({onClick, isNestedInSection, parentId, sectionParent, guidePa
                 reviews: []
             };
         } else {
-            console.log("ta num topico");
             jsonResult = {
                 id: uuidv4(),
                 title: titleTopic,

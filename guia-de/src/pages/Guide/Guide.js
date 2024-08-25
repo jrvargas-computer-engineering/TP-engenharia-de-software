@@ -1,3 +1,4 @@
+// Guide.js
 import React, { useState, useEffect } from 'react';
 import './Guide.css';
 import Section from '../../components/Section/Section';
@@ -135,7 +136,7 @@ export function Guide() {
     if (loading) {
         return <div>Loading...</div>;
     }
-    
+
     return (
         <div className='guide-container'>
             <div className="main-container">

@@ -46,9 +46,22 @@ function Section({title, topics, sectionId, reviews}) {
             
             <div className="content-container">
                 <div className="grid-container">
-                    {topics && topics.length > 0 && topics.map((topic, index) => (
-                        <Topic key={index} title={topic.title} opinions={reviews} childTopics={topic.childTopics} hierarchy={topic.hierarchy} topicId={topic.id}/>
-                    ))}
+                    {topics && topics.length > 0 && topics.map((topic, index) => {
+                        const topic_reviews = reviews.filter(review => {
+                        return topic.reviews.includes(review.id); // Verifica se o ID do review está no array de IDs
+                        });
+
+                        return (
+                        <Topic
+                            key={index}
+                            title={topic.title}
+                            opinions={topic_reviews}
+                            childTopics={topic.childTopics}
+                            hierarchy={topic.hierarchy}
+                            topicId={topic.id}
+                        />
+                        );
+                    })}
                 </div>
             </div>
         </div>
