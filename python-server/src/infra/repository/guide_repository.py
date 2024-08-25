@@ -32,7 +32,10 @@ class GuideRepository:
     def search(self, query):
         regex_query = {"$regex": query, "$options": "i"}  # Case-insensitive search
         documents = self.collection.find({
-            "name": regex_query
+            "$or": [
+                {"name": regex_query},
+                {"description": regex_query}
+            ]
         })
         
         results = []
