@@ -25,6 +25,32 @@ async function postReviewData(reviewData) {
         console.error('Erro ao fazer o POST:', error);
     }
 }
+
+async function addReviewToTopic(reviewData) {
+    const url = 'http://localhost:4000/topic/add_review';   
+    try {   
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                topic_id: reviewData.topic_id,
+                review_id: reviewData.review_id
+            })
+        });
+
+        if (!response.ok) {
+            throw new Error('Erro na requisição: ' + response.statusText);
+        }
+
+        const data = await response.json();
+        console.log('Resposta do servidor:', data);
+    }       
+    catch (error) {
+        console.error('Erro ao fazer o POST:', error);
+    }      
+}
        
 async function getReviewData(id) {
 
@@ -75,9 +101,11 @@ function OpinionForm(topicId) {
         console.log("ReviewData: ", reviewData);
 
         postReviewData(reviewData);
-        const review = getReviewData(reviewData.id);
-
-        console.log("review: ", review);
+        console.log("topicId: ", topicId);
+        console.log("reviewData.id: ", reviewData.id);    
+        addReviewToTopic({topic_id: topicId.topicId, review_id: reviewData.id});        
+        //const review = getReviewData(reviewData.id);
+        //console.log("review: ", review);
         
         
         const addReviewToJson = (jsonData, topicId, reviewData) => {

@@ -45,20 +45,7 @@ export function Topic({ title, opinions, childTopics, hierarchy, topicId }) {
         addGoogleFontLink();
     }, []);
 
-    useEffect(() => {
-        const fetchUsers = async () => {
-            const userIds = opinions.map(opinion => opinion.owner);
-            const uniqueUserIds = [...new Set(userIds)]; // Remove duplicados
-            const usersData = await getUsers(uniqueUserIds);
-            const usersMap = {};
-            usersData.forEach(user => {
-                usersMap[user.id] = user;
-            });
-            setUsers(usersMap);
-            setLoading(false);
-        };
-        fetchUsers();
-    }, [opinions]);
+
 
     const titleSize = hierarchy === 0 ? 'large-title' : 'medium-title';
     const buttonNewTopic = hierarchy === 0 ? true : false;
@@ -99,9 +86,15 @@ export function Topic({ title, opinions, childTopics, hierarchy, topicId }) {
                     )}
                     {opinions && opinions.length > 0 && opinions.map((opinion, index) => {
                         const user = users[opinion.owner];
+                        console.log("Users: ", users);
                         return (
-                            <Opinion key={index} title={opinion.title} user={user ? user.username : 'Anonymous User'} content={opinion.content} />
-                        );
+                            <Opinion 
+                                key={index} 
+                                title={opinion.title} 
+                                user={user && user.username ? user.username : 'Anonymous User'} 
+                                content={opinion.content} 
+                            />                        
+                            );
                     })}
                     <div className='form-space'>
                         <div className='form-box'>

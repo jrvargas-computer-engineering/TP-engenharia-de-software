@@ -16,6 +16,10 @@ class CreateTopicInput(BaseModel):
     children_topics: bool
     reviews: list       
 
+class AddReviewInput(BaseModel):
+    topic_id: str
+    review_id: str
+
 @topic_router.post("/create")
 async def create_topic(input: CreateTopicInput):
     print(f"create topic: {input}") 
@@ -48,3 +52,13 @@ async def delete_topic(input):
     except Exception as e:
         print(f"Error: {e}")
         raise HTTPException(status_code=500, detail="Erro ao deletar o tópico")
+
+@topic_router.post("/add_review")
+async def add_review(input: AddReviewInput):
+    try:
+        topic_repository = TopicRepository()
+        topic_repository.add_review(input.topic_id, input.review_id)
+        return {"status": "ok"}
+    except Exception as e:
+        print(f"Error: {e}")
+        raise HTTPException(status_code=500, detail="Erro ao adicionar a revisão ao tópico")

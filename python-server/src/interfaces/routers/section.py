@@ -17,9 +17,12 @@ class CreateSectionInput(BaseModel):
     title: str
     topics: list
 
+class AddSectionTopicInput(BaseModel):
+    section_id: str
+    topic_id: str
+
 @section_router.post("/create")
-async def create_section(input: CreateSectionInput): 
-    print(f"create section: {input}")   
+async def create_section(input: CreateSectionInput):  
     try:
         create_section_usecase.exec(input)
         return {"status": "ok"}
@@ -40,7 +43,6 @@ async def get_sections(input: str = Query(...)):
         print(f"Error: {e}")
         raise HTTPException(status_code=500, detail="Error retrieving sections")
 
-
 @section_router.post("/delete")
 async def delete_section(input: SectionIdInput):
     try:
@@ -50,12 +52,14 @@ async def delete_section(input: SectionIdInput):
     except Exception as e:
         print(f"Error: {e}")
         raise HTTPException(status_code=500, detail="Erro ao deletar a seção")
-    
-@section_router.post("/update")
-async def update_section(input: CreateSectionInput):
+
+@section_router.post("/add_topic")
+async def add_topic(input: AddSectionTopicInput):
+    print(f"input: {input}")    
     try:
-        update_section_usecase.exec(input)
+        section_repository = SectionRepository()
+        section_repository.add_topic(input.section_id, input.topic_id)
         return {"status": "ok"}
     except Exception as e:
         print(f"Error: {e}")
-        raise HTTPException(status_code=500, detail="Erro ao atualizar a seção")
+        raise HTTPException(status_code=500, detail="Erro ao atualizar os tópicos da seção")

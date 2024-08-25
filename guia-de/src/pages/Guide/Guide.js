@@ -128,7 +128,7 @@ export function Guide() {
         }
 
         // Example usage with a list of guide IDs
-        const guideId = "das1";   
+        const guideId = "3f0b9f34-8df6-4cab-a63e-488be3f0c19a";   
         fetchData(guideId);
     }, []);
 

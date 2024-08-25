@@ -39,3 +39,13 @@ class SectionRepository:
 
     def update(self, section):
         self.collection.update_one({"id": section.get_id()}, {"$set": section.__dict__})
+
+
+    def add_topic(self, section_id, topic_id):
+        print(f"section_id: {section_id}")
+        print(f"topic_id: {topic_id}")
+        # Adiciona um novo tópico à seção especificada
+        self.collection.update_one(
+            {"id": section_id},
+            {"$push": {"topics": topic_id}}
+        )

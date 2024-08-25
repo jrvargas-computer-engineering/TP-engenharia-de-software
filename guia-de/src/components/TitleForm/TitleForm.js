@@ -26,12 +26,38 @@ async function postTopic(topicData) {
     } catch (error) {
         console.error('Erro ao fazer o POST:', error);
     }
+}  
+
+async function addTopicToSection(topicData) {    
+    const url = 'http://localhost:4000/section/add_topic';
+    
+    try {
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                section_id: topicData.section_id,
+                topic_id: topicData.topic_id
+            })
+        });
+
+        if (!response.ok) {
+            throw new Error('Erro na requisição: ' + response.statusText);
+        }
+
+        const data = await response.json();
+        console.log('Resposta do servidor:', data);
+    } catch (error) {
+        console.error('Erro ao fazer o POST:', error);
+    }
 }
       
 
 
-function TitleForm({onClick, isNestedInSection, id, parentId, sectionParent, guideParent}) {
-
+function TitleForm({onClick, isNestedInSection, parentId, sectionParent, guideParent}) {
+ 
     const [titleTopic, setTitle] = useState('');
 
     const handleClick = () => {
@@ -57,6 +83,7 @@ function TitleForm({onClick, isNestedInSection, id, parentId, sectionParent, gui
         }
     
         postTopic(jsonResult);
+        addTopicToSection({section_id: sectionParent, topic_id: jsonResult.id}); 
         console.log(JSON.stringify(jsonResult, null, 2));
       };
 

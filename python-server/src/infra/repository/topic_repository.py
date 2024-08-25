@@ -26,3 +26,10 @@ class TopicRepository:
             result.append(document)
         
         return result
+    
+    def add_review(self, topic_id, review_id):
+    # Adiciona uma nova revisão ao tópico especificado
+        self.collection.update_one(
+            {"id": topic_id},
+            {"$push": {"reviews": review_id}}
+        )
