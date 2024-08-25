@@ -45,7 +45,18 @@ export function Topic({ title, opinions, childTopics, hierarchy, topicId }) {
         addGoogleFontLink();
     }, []);
 
+    useEffect(() => {
+        const fetchUsers = async () => {
+            if (opinions && opinions.length > 0) {
+                const userIds = opinions.map(opinion => opinion.owner);
+                const usersData = await getUsers(userIds);
+                setUsers(usersData);
+            }
+            setLoading(false);
+        };
 
+        fetchUsers();
+    }, [opinions]);
 
     const titleSize = hierarchy === 0 ? 'large-title' : 'medium-title';
     const buttonNewTopic = hierarchy === 0 ? true : false;
