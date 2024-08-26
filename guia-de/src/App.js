@@ -21,7 +21,7 @@ function App() {
               path="/Home" 
               element={<Home />}
             />
-            <Route path="/Guide" element={<Guide guideData={data}/>}/>
+            <Route path="/Guide/:guideId" element={<Guide/>}/>
             <Route path="/Search" element ={<Search/>}/>
             <Route path="/MyAccount" element={<MyAccount/>}/>
             <Route path="/AddGuide" element={<AddGuide/>}/>

@@ -49,6 +49,7 @@ code {
 .small-user{
   font-family: 'Roboto Flex', sans-serif;
   font-size: 15px;
+  font-style: italic;
   color: var(--text-main-color);
   font-weight: normal;
   margin: 0px; 

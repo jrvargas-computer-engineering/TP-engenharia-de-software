@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
-import {jwtDecode} from 'jwt-decode'; // Corrigido para 'jwt-decode'
+import { jwtDecode } from 'jwt-decode'; // Correção na importação
 import axios from 'axios';
 import './MyAccount.css';
 
@@ -36,6 +36,7 @@ function MyAccount() {
                 localStorage.setItem('userInfo', JSON.stringify(response.data.user));
                 setUserInfo(response.data.user);
                 setIsAuthenticated(true);
+                window.location.reload(); // Recarrega a página após o login bem-sucedido
             })
             .catch(error => {
                 console.error('Login failed:', error);
@@ -47,6 +48,7 @@ function MyAccount() {
         localStorage.removeItem('userInfo');
         setUserInfo(null);
         setIsAuthenticated(false);
+        window.location.reload(); // Recarrega a página após o logout
     };
 
     return (

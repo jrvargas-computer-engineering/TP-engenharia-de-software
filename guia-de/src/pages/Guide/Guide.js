@@ -1,7 +1,17 @@
 // Guide.js
 import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import './Guide.css';
 import Section from '../../components/Section/Section';
+
+const addGoogleFontLink = () => {
+    const link = document.createElement('link');
+    link.href = "https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200";
+    link.rel = "stylesheet";
+    document.head.appendChild(link);
+};
+
 
 async function getReviews(ids) {
     try {
@@ -88,12 +98,29 @@ async function getGuide(id) {
 }
 
 export function Guide() {
+
+    const navigate = useNavigate();
+
+
+    const { guideId } = useParams(); 
+
+    const handleClick = () => {
+        navigate(`/home`);
+    };
+    
+
+
     const [guide, setGuide] = useState([]);
     const [sections, setSections] = useState([]);
     const [topics, setTopics] = useState([]);
     const [reviews, setReviews] = useState([]);
     const [loading, setLoading] = useState(true);
 
+    useEffect(() => {
+        addGoogleFontLink();
+    }, []);
+
+    console.log("id: " + guideId);
     useEffect(() => {
         async function fetchData(guideId) {     
             // 1. Fetch Guides
@@ -129,7 +156,6 @@ export function Guide() {
         }
 
         // Example usage with a list of guide IDs
-        const guideId = "3f0b9f34-8df6-4cab-a63e-488be3f0c19a";   
         fetchData(guideId);
     }, []);
 
@@ -139,9 +165,17 @@ export function Guide() {
 
     return (
         <div className='guide-container'>
+            <span className={`material-symbols-outlined`} 
+                  id="icon-back"
+                  onClick={handleClick}
+                  >
+                    arrow_back
+            </span>
+
             <div className="main-container">
                 <div className="title-container"> 
-                    <h1 className="main-title">{guide[0]?.name}</h1>
+                    <h1 className="main-title">{guide.name}</h1>
+                    <h2 className="guide-description medium-text">{guide.description}</h2>
                 </div>
 
                 <div className='content-container'>

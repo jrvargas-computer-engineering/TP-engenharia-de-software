@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+
 import Guide from "../../pages/Guide/Guide"
 import './CardSearch.css';
 
@@ -11,16 +12,24 @@ const addGoogleFontLink = () => {
   };
   
 
-function CardSearch({ num, title, local, abstract }) {
+function CardSearch({ num, title, local, abstract, id }) {
+    const navigate = useNavigate();
+
+    const handleCardClick = () => {
+      // Redireciona para a rota Guide passando o guideId
+      navigate(`/guide/${id}`);
+    };
 
     useEffect(() => {
         addGoogleFontLink();
     }, []);
 
-
+    console.log(id)
 
     return (
-      <div className="card-container">
+      <div className="card-container"
+           onClick={handleCardClick}
+      >
             <div className="card-box">
                 <div className="card-header">
                     <div className="card-num-box">

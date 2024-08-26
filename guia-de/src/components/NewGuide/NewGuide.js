@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 import './NewGuide.css';
 
@@ -56,6 +57,8 @@ async function postSection(sectionData) {
 }
 
 function NewGuide({ toggleFunction }) {
+    const navigate = useNavigate();
+
 
     useEffect(() => {
         addGoogleFontLink();
@@ -102,6 +105,9 @@ function NewGuide({ toggleFunction }) {
 
         postGuide(guideData);
         postSection(sectionData);
+
+        navigate(`/guide/${guideData.id}`);
+
     };
 
     return (

@@ -20,6 +20,7 @@ async function postReviewData(reviewData) {
 
         const data = await response.json();
         console.log('Resposta do servidor:', data);
+        window.location.reload(); // Recarrega a página após a criação da opinião
     } catch (error) {
         console.error('Erro ao fazer o POST:', error);
     }
@@ -50,33 +51,10 @@ async function addReviewToTopic(reviewData) {
         console.error('Erro ao fazer o POST:', error);
     }      
 }
-       
-async function getReviewData(id) {
-
-    try {
-        const response = await fetch(`http://localhost:4000/review/?id=${id}`, {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        });
-
-        if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
-        const data = await response.json();
-        console.log(data);
-        return data;
-    } catch (error) {
-        console.error('Error fetching data:', error);
-    }
-}
 
 function OpinionForm({ topicId }) {    
     const jsonData = require('../../data/guides.json');
 
-    // Estados para armazenar o conteúdo dos campos
     const [isVisible, setIsVisible] = useState(false); 
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
@@ -90,7 +68,7 @@ function OpinionForm({ topicId }) {
     }, []);
 
     const toggleVisibility = () => {
-      setIsVisible(!isVisible); 
+        setIsVisible(!isVisible); 
     };
 
     const handleSubmit = () => {
@@ -102,26 +80,9 @@ function OpinionForm({ topicId }) {
             owner: userId ? userId : "Anonymous"
         };
 
-        postReviewData(reviewData);
-        addReviewToTopic({ topic_id: topicId, review_id: reviewData.id });        
-        
-        const addReviewToJson = (jsonData, topicId, reviewData) => {
-            for (const section of jsonData.GuideSections) {
-                for (const topic of section.topics) {
-                    if (topic.id === topicId) {
-                        topic.opinions.push(reviewData);
-                        return jsonData;
-                    }
-                }
-            }
-            console.error("Topic com topicId " + topicId + " não encontrado.");
-            return jsonData;
-        };
-              
-        const updatedJson = addReviewToJson(jsonData, topicId, reviewData);
-
-        // Converte o JSON atualizado para uma string
-        const jsonString = JSON.stringify(updatedJson, null, 2);
+        postReviewData(reviewData).then(() => {
+            addReviewToTopic({ topic_id: topicId, review_id: reviewData.id });
+        });
     };
     
     return (
@@ -136,7 +97,7 @@ function OpinionForm({ topicId }) {
                           name="review-title"
                           placeholder="Título do review"
                           value={title}
-                          onChange={(e) => setTitle(e.target.value)} // Atualiza o estado com o valor do input
+                          onChange={(e) => setTitle(e.target.value)}
                       />
                   </form>
               </div>
@@ -147,7 +108,7 @@ function OpinionForm({ topicId }) {
                           name="review-content"
                           placeholder="Insira seu review aqui!"
                           value={content}
-                          onChange={(e) => setContent(e.target.value)} // Atualiza o estado com o valor do textarea
+                          onChange={(e) => setContent(e.target.value)}
                       />
                   </form>
               </div>
@@ -155,7 +116,7 @@ function OpinionForm({ topicId }) {
                   <button
                       className="button-medium small-stylized-title"
                       type="button"
-                      onClick={handleSubmit} // Chama a função handleSubmit ao clicar
+                      onClick={handleSubmit}
                   >
                       PUBLICAR
                   </button>
@@ -169,7 +130,7 @@ function OpinionForm({ topicId }) {
                 <button
                     className="button-medium-2 small-stylized-title"
                     type="button"
-                    onClick={toggleVisibility } // Chama a função handleSubmit ao clicar
+                    onClick={toggleVisibility}
                 >
                     NOVO REVIEW
                 </button>   

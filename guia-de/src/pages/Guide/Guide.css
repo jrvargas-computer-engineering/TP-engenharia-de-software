@@ -1,10 +1,17 @@
 /* src/pages/Guide.css */
+
 .guide-container{
+  width: 97vw;
   display: flex;
   justify-content: center;
-  /*background-color: cadetblue;*/
 }
 
+#icon-back{
+  color: var(--secundary-color);
+  position: absolute;
+  margin-top: 30px;
+  cursor: pointer;
+}
 .main-container {
   width: 70%;
   justify-content: center;
@@ -20,6 +27,13 @@
 }
 */
 
+.guide-description{
+  text-align: center;
+  text-justify: center;
+  font-weight: normal;
+  margin-bottom: 50px;
+}
+
 /*
 .content-container{
   background-color: violet;
@@ -34,3 +48,6 @@
     align-items: center; /* Centraliza os itens verticalmente */
   }
 
+.title-container{
+  margin-top: 100px;
+}

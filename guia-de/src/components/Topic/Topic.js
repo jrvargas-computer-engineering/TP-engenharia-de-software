@@ -71,6 +71,7 @@ export function Topic({ title, opinions, childTopics, hierarchy, topicId }) {
             <div className="header-topic">
                 <h1 className={titleSize}>{title}</h1>
                 {buttonNewTopic && !isVisible && (
+                    
                     <>
                         <div className='new-topic-button-container ' id="container-button-subtopic">
                             <button

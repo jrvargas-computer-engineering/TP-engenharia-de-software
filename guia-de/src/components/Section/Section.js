@@ -13,7 +13,7 @@ function Section({title, topics, sectionId, reviews}) {
     const toggleVisibility = () => {
         setIsVisible(!isVisible); 
       };
-
+      
     return (
         <div className="section-container">
             <div className="header-container">

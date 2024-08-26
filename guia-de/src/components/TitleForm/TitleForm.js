@@ -1,9 +1,6 @@
-// src/components/TitleForm.js
 import React, { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import './TitleForm.css';
- 
-
 
 async function postTopic(topicData) {
     const url = 'http://localhost:4000/topic/create';
@@ -23,10 +20,11 @@ async function postTopic(topicData) {
 
         const data = await response.json();
         console.log('Resposta do servidor:', data);
+        window.location.reload(); // Recarrega a página após a criação do tópico
     } catch (error) {
         console.error('Erro ao fazer o POST:', error);
     }
-}  
+}
 
 async function addTopicToSection(topicData) {    
     const url = 'http://localhost:4000/section/add_topic';
@@ -53,62 +51,48 @@ async function addTopicToSection(topicData) {
         console.error('Erro ao fazer o POST:', error);
     }
 }
-      
 
-
-function TitleForm({onClick, isNestedInSection, parentId, sectionParent, guideParent}) {
- 
+function TitleForm({ onClick, isNestedInSection, parentId, sectionParent }) {
     const [titleTopic, setTitle] = useState('');
 
     const handleClick = () => {
-        let jsonResult;
-    
-        if (isNestedInSection) {
-            jsonResult = {
-                id: uuidv4(),
-                title: titleTopic,
-                hierarchy: 0,
-                children_topics: false,
-                reviews: []
-            };
-        } else {
-            jsonResult = {
-                id: uuidv4(),
-                title: titleTopic,
-                hierarchy: 1,
-                children_topics: false,
-                reviews: []
-          };
-        }
-    
-        postTopic(jsonResult);
-        addTopicToSection({section_id: sectionParent, topic_id: jsonResult.id}); 
-        console.log(JSON.stringify(jsonResult, null, 2));
-      };
+        const newTopic = {
+            id: uuidv4(),
+            title: titleTopic,
+            hierarchy: isNestedInSection ? 0 : 1,
+            children_topics: false,
+            reviews: []
+        };
 
+        postTopic(newTopic).then(() => {
+            addTopicToSection({ section_id: sectionParent, topic_id: newTopic.id });
+        });
 
-  return (
-    <div className="form-title-container form-style">
-        <div className='title-box'>
-            <form>
-                <input 
-                    className="medium-text label-form"  
-                    type="text" 
-                    id="title" 
-                    name="title" 
-                    onChange={(e) => setTitle(e.target.value)}
-                    placeholder="Insira o título"
-                />            
-            </form>
+        onClick(); 
+    };
+
+    return (
+        <div className="form-title-container form-style">
+            <div className='title-box'>
+                <form>
+                    <input 
+                        className="medium-text label-form"  
+                        type="text" 
+                        id="title" 
+                        name="title" 
+                        onChange={(e) => setTitle(e.target.value)}
+                        placeholder="Insira o título"
+                    />            
+                </form>
+            </div>
+            <div className='button-box'>
+                <button 
+                    className="button-medium small-stylized-title"
+                    onClick={handleClick}
+                >PUBLICAR</button>
+            </div>
         </div>
-        <div className='button-box'>
-            <button 
-                className="button-medium small-stylized-title"
-                onClick={() => { onClick(); handleClick(); }}
-            >PUBLICAR</button>
-        </div>
-    </div>
-  );
+    );
 }
 
 export default TitleForm;
