@@ -34,7 +34,8 @@ class GuideRepository:
         documents = self.collection.find({
             "$or": [
                 {"name": regex_query},
-                {"description": regex_query}
+                {"description": regex_query},
+                {"location.city": regex_query}
             ]
         })
         
